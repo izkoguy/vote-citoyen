@@ -1,0 +1,14 @@
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Dossiers de build / dépendances
+node_modules/
+dist/
+build/
+
+# Fichiers d'éditeur
+.idea/
+.vscode/
+*.swp
+*.swo

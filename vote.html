@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vote Citoyen — Vote</title>
+  <meta name="description" content="Exprimez votre choix sur le sujet du jour." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="logo" aria-label="Vote Citoyen — Accueil">
+        <span class="logo-icon" aria-hidden="true">V</span>
+        Vote Citoyen
+      </a>
+      <nav class="nav-main" aria-label="Navigation principale">
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="connexion.html">Connexion</a></li>
+          <li><a href="vote.html">Vote</a></li>
+          <li><a href="resultat.html">Résultat</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section aria-label="Vote en cours">
+      <h1>Votre choix</h1>
+      <p>Sélectionnez l'option qui correspond le mieux à votre position.</p>
+
+      <form id="vote-form" class="vote-grid" aria-label="Options de vote">
+        <label class="vote-card" for="opt-a">
+          <input type="radio" id="opt-a" name="option" value="A" />
+          <div class="card-body">
+            <h3 class="card-title">Option A</h3>
+            <p class="card-desc">Favoriser la transition écologique par des investissements publics ciblés.</p>
+            <span class="select-btn">Sélectionner</span>
+          </div>
+        </label>
+
+        <label class="vote-card" for="opt-b">
+          <input type="radio" id="opt-b" name="option" value="B" />
+          <div class="card-body">
+            <h3 class="card-title">Option B</h3>
+            <p class="card-desc">Maintenir le statu quo avec des ajustements progressifs.</p>
+            <span class="select-btn">Sélectionner</span>
+          </div>
+        </label>
+
+        <label class="vote-card" for="opt-c">
+          <input type="radio" id="opt-c" name="option" value="C" />
+          <div class="card-body">
+            <h3 class="card-title">Option C</h3>
+            <p class="card-desc">Réformer en profondeur avec un nouveau cadre législatif.</p>
+            <span class="select-btn">Sélectionner</span>
+          </div>
+        </label>
+
+        <div style="grid-column: 1 / -1; text-align: center; margin-top: 1rem;">
+          <button type="submit" class="btn btn-primary">Valider mon vote</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <div class="prototype-banner" role="note" aria-label="Avertissement prototype">
+    <span>Prototype scolaire — démonstration fictive</span>
+  </div>
+  <footer class="site-footer" role="contentinfo">
+    <p>© Vote Citoyen — Projet statique sans backend.</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
