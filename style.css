@@ -540,65 +540,75 @@ main {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.chart-row {
+  display: grid;
+  grid-template-columns: 220px 1fr 80px;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--blanc);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(10,37,64,0.06);
+}
+
+.chart-name {
+  font-weight: 700;
+  color: var(--bleu-profond);
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chart-bar-container {
+  width: 100%;
+  height: 28px;
+  background: #e8ecf0;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
 }
 
 .chart-bar {
-  height: 36px;
+  height: 100%;
   border-radius: 6px;
-  display: flex;
-  align-items: center;
-  padding-left: 1rem;
-  color: var(--blanc);
-  font-weight: 700;
-  font-size: 0.9rem;
-  box-shadow: 0 2px 8px rgba(10,37,64,0.15);
   transition: width 0.6s ease;
+  min-width: 4px;
 }
 
-.results-table {
-  max-width: 520px;
-  margin: 0 auto 2rem;
-  background: var(--blanc);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: 0 8px 30px var(--ombre);
-}
-
-.results-table table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.results-table th,
-.results-table td {
-  padding: 0.85rem 1rem;
-  text-align: left;
-  border-bottom: 1px solid #e8ecf0;
-}
-
-.results-table th {
-  background: var(--bleu-profond);
-  color: var(--blanc);
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-.results-table td {
+.chart-percent {
+  text-align: right;
+  font-weight: 700;
   color: var(--gris-texte);
   font-size: 0.95rem;
+  white-space: nowrap;
 }
 
-.results-table tr:last-child td {
-  border-bottom: none;
+@media (max-width: 640px) {
+  .chart-row {
+    grid-template-columns: 1fr 60px;
+    grid-template-rows: auto auto;
+    gap: 0.35rem 0.75rem;
+  }
+  .chart-name {
+    grid-column: 1 / -1;
+    font-size: 0.9rem;
+  }
+  .chart-bar-container {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .chart-percent {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: center;
+  }
 }
 
-.results-total {
-  text-align: center;
-  font-weight: 700;
-  color: var(--bleu-profond);
-  margin-top: 0.75rem;
-  font-size: 1.1rem;
-}
 
 /* Footer */
 .site-footer {
