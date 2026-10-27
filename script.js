@@ -6,15 +6,105 @@
 (function () {
   'use strict';
 
-  // Connexion
+  // État de connexion fictif (non persistant)
+  window.isConnected = false;
+
+  function updateNavState() {
+    const btn = document.getElementById('nav-login-btn');
+    const profile = document.getElementById('profile-wrapper');
+    if (!btn || !profile) return;
+    if (window.isConnected) {
+      btn.style.display = 'none';
+      profile.style.display = 'inline-flex';
+    } else {
+      btn.style.display = 'inline-flex';
+      profile.style.display = 'none';
+    }
+  }
+
+  function openProfileMenu() {
+    const menu = document.getElementById('profile-menu');
+    if (menu) menu.classList.add('open');
+  }
+
+  function closeProfileMenu() {
+    const menu = document.getElementById('profile-menu');
+    if (menu) menu.classList.remove('open');
+  }
+
+  function toggleProfileMenu() {
+    const menu = document.getElementById('profile-menu');
+    if (!menu) return;
+    if (menu.classList.contains('open')) closeProfileMenu();
+    else openProfileMenu();
+  }
+
+  function connectUser() {
+    window.isConnected = true;
+    updateNavState();
+  }
+
+  function disconnectUser() {
+    window.isConnected = false;
+    closeProfileMenu();
+    updateNavState();
+    window.location.href = 'index.html';
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    updateNavState();
+
+    const navLoginBtn = document.getElementById('nav-login-btn');
+    if (navLoginBtn) {
+      navLoginBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.location.href = 'connexion.html';
+      });
+    }
+
+    const profileBtn = document.getElementById('profile-btn');
+    if (profileBtn) {
+      profileBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        toggleProfileMenu();
+      });
+    }
+
+    const logoutBtn = document.getElementById('profile-logout');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        disconnectUser();
+      });
+    }
+
+    document.addEventListener('click', function (e) {
+      const wrapper = document.getElementById('profile-wrapper');
+      if (wrapper && !wrapper.contains(e.target)) {
+        closeProfileMenu();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeProfileMenu();
+    });
+  });
+
+  // Connexion via formulaire
   const loginForm = document.getElementById('login-form');
   if (loginForm) {
     loginForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      const email = document.getElementById('email') ? document.getElementById('email').value.trim() : '';
-      const password = document.getElementById('password') ? document.getElementById('password').value.trim() : '';
-      // Aucune validation stricte requise — démonstration fictive
+      connectUser();
       window.location.href = 'verification.html';
+    });
+  }
+
+  // Skip connexion (bouton secondaire sur connexion.html)
+  const skipBtn = document.querySelector('a[href="verification.html"]');
+  if (skipBtn && skipBtn.closest('.form-actions')) {
+    skipBtn.addEventListener('click', function (e) {
+      connectUser();
     });
   }
 
@@ -27,10 +117,8 @@
     state.classList.add('success');
     btn.textContent = 'Simulation terminée';
     btn.disabled = true;
-    // Afficher le panneau visage
     document.getElementById('panel-identite').classList.add('hidden');
     document.getElementById('panel-visage').classList.remove('hidden');
-    // Mettre à jour la progression
     document.querySelectorAll('.progress-step').forEach((step, i) => {
       if (i === 0) step.classList.add('active');
       else step.classList.remove('active');
@@ -46,10 +134,8 @@
     state.classList.add('success');
     btn.textContent = 'Simulation terminée';
     btn.disabled = true;
-    // Afficher le bouton continuer
     const continuer = document.getElementById('btn-continuer');
     if (continuer) continuer.style.display = 'inline-flex';
-    // Mettre à jour la progression
     document.querySelectorAll('.progress-step').forEach((step, i) => {
       if (i === 1) step.classList.add('active');
       else step.classList.remove('active');

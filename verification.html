@@ -22,6 +22,16 @@
           <li><a href="vote.html">Bulletin</a></li>
           <li><a href="resultat.html">Résultats</a></li>
         </ul>
+        <a href="connexion.html" id="nav-login-btn" class="nav-login-btn" aria-label="Se connecter">Se connecter</a>
+        <div id="profile-wrapper" class="profile-wrapper" style="display:none;" aria-label="Menu profil">
+          <button id="profile-btn" class="profile-btn" aria-label="Profil" aria-expanded="false" aria-haspopup="true">
+            <img src="assets/profile-icon.svg" alt="" aria-hidden="true" style="width:20px;height:20px;display:block;" />
+          </button>
+          <div id="profile-menu" class="profile-menu" role="menu" aria-label="Menu du profil">
+            <span class="menu-label">Preview Account</span>
+            <button id="profile-logout" class="menu-btn" role="menuitem">Se déconnecter</button>
+          </div>
+        </div>
       </nav>
     </div>
   </header>
