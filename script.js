@@ -6,8 +6,12 @@
 (function () {
   'use strict';
 
-  // État de connexion fictif (non persistant)
+  // État de connexion fictif (non persistant, paramètre URL minimal)
   window.isConnected = false;
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('demo')) {
+    window.isConnected = true;
+  }
 
   function updateNavState() {
     const btn = document.getElementById('nav-login-btn');
@@ -24,12 +28,16 @@
 
   function openProfileMenu() {
     const menu = document.getElementById('profile-menu');
+    const btn = document.getElementById('profile-btn');
     if (menu) menu.classList.add('open');
+    if (btn) btn.setAttribute('aria-expanded', 'true');
   }
 
   function closeProfileMenu() {
     const menu = document.getElementById('profile-menu');
+    const btn = document.getElementById('profile-btn');
     if (menu) menu.classList.remove('open');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
   }
 
   function toggleProfileMenu() {
@@ -42,6 +50,11 @@
   function connectUser() {
     window.isConnected = true;
     updateNavState();
+  }
+
+  function navigateWithDemo(url) {
+    const separator = url.includes('?') ? '&' : '?';
+    window.location.href = url + separator + 'demo=1';
   }
 
   function disconnectUser() {
@@ -96,7 +109,7 @@
     loginForm.addEventListener('submit', function (e) {
       e.preventDefault();
       connectUser();
-      window.location.href = 'verification.html';
+      navigateWithDemo('verification.html');
     });
   }
 
@@ -104,7 +117,9 @@
   const skipBtn = document.querySelector('a[href="verification.html"]');
   if (skipBtn && skipBtn.closest('.form-actions')) {
     skipBtn.addEventListener('click', function (e) {
+      e.preventDefault();
       connectUser();
+      navigateWithDemo('verification.html');
     });
   }
 
