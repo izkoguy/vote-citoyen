@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vote Citoyen — Résultat</title>
-  <meta name="description" content="Résultat simulé du vote citoyen." />
+  <title>Vote Citoyen — Résultats</title>
+  <meta name="description" content="Résultats différés et fictifs de l'élection présidentielle fictive." />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -18,28 +18,90 @@
         <ul>
           <li><a href="index.html">Accueil</a></li>
           <li><a href="connexion.html">Connexion</a></li>
-          <li><a href="vote.html">Vote</a></li>
-          <li><a href="resultat.html">Résultat</a></li>
+          <li><a href="verification.html">Vérification</a></li>
+          <li><a href="vote.html">Bulletin</a></li>
+          <li><a href="resultat.html" aria-current="page">Résultats</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="result-card" aria-label="Résultat du vote">
-      <h2>Résultat simulé</h2>
-      <p>Voici le résultat prédéfini du vote citoyen.</p>
-      <div class="result-value" aria-live="polite">Option A — 62%</div>
-      <p>Ce résultat est fixe et ne reflète aucun calcul réel. Il sert uniquement à démontrer le parcours.</p>
-      <a href="index.html" class="btn btn-primary">Retour à l'accueil</a>
+    <section id="confirmation-section" aria-label="Confirmation du bulletin">
+      <div class="confirmation-card">
+        <h2>Confirmation du bulletin</h2>
+        <p>Votre choix a été enregistré dans le cadre de cette démonstration fictive. Aucun vote réel n'a été transmis ni enregistré.</p>
+        <p class="demo-note">Les résultats affichés sont différés et fictifs. Ils ne reflètent pas le choix que vous venez d'effectuer.</p>
+        <a href="#" onclick="showWaiting(); return false;" class="btn btn-primary">Voir les résultats</a>
+      </div>
+    </section>
+
+    <section id="waiting-section" class="hidden" aria-label="Attente des résultats">
+      <div class="waiting-card">
+        <h2>Résultats en cours de compilation</h2>
+        <p>Les résultats différés et fictifs sont en cours de traitement. Ce délai est purement simulé.</p>
+        <div class="waiting-spinner" aria-label="Chargement simulé">
+          <div class="spinner"></div>
+        </div>
+        <p class="demo-note">Pour faciliter la présentation scolaire, vous pouvez passer immédiatement ce délai.</p>
+        <button type="button" class="btn btn-primary" onclick="showResults()">Passer le délai et afficher les résultats</button>
+      </div>
+    </section>
+
+    <section id="results-section" class="hidden" aria-label="Résultats de l'élection présidentielle fictive">
+      <h1>Résultats — Élection présidentielle fictive</h1>
+      <p class="subtitle">Résultats différés et fictifs — données fixes non liées au vote de l'utilisateur.</p>
+
+      <div class="results-summary">
+        <div class="results-chart" aria-label="Diagramme des résultats">
+          <div class="chart-bar" style="width: 40%; background: var(--bleu-profond);" aria-label="Monsieur Delarbre : 40 %">
+            <span class="chart-label">Monsieur Delarbre — 40 %</span>
+          </div>
+          <div class="chart-bar" style="width: 20%; background: var(--bleu-moyen);" aria-label="Jérémy : 20 %">
+            <span class="chart-label">Jérémy — 20 %</span>
+          </div>
+          <div class="chart-bar" style="width: 12%; background: #2a5a8a;" aria-label="Nahil : 12 %">
+            <span class="chart-label">Nahil — 12 %</span>
+          </div>
+          <div class="chart-bar" style="width: 12%; background: #3a6a9a;" aria-label="Michou : 12 %">
+            <span class="chart-label">Michou — 12 %</span>
+          </div>
+          <div class="chart-bar" style="width: 9%; background: #4a7aaa;" aria-label="Michael Jackson : 9 %">
+            <span class="chart-label">Michael Jackson — 9 %</span>
+          </div>
+          <div class="chart-bar" style="width: 7%; background: #5a8aba;" aria-label="Jul : 7 %">
+            <span class="chart-label">Jul — 7 %</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-table" aria-label="Tableau des résultats">
+        <table>
+          <thead>
+            <tr><th>Candidat</th><th>Pourcentage</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Monsieur Delarbre</td><td>40 %</td></tr>
+            <tr><td>Jérémy</td><td>20 %</td></tr>
+            <tr><td>Nahil</td><td>12 %</td></tr>
+            <tr><td>Léa Moreau</td><td>12 %</td></tr>
+            <tr><td>Thomas Vidal</td><td>9 %</td></tr>
+            <tr><td>Camille Bernard</td><td>7 %</td></tr>
+          </tbody>
+        </table>
+        <p class="results-total">Total : 100 %</p>
+      </div>
+
+      <p class="demo-note">Ces résultats sont fixes et fictifs. Ils ne sont pas calculés à partir d'un vote réel.</p>
+      <a href="index.html" class="btn btn-secondary">Recommencer la démonstration</a>
     </section>
   </main>
 
   <div class="prototype-banner" role="note" aria-label="Avertissement prototype">
-    <span>Prototype scolaire — démonstration fictive</span>
+    <span>Prototype scolaire — démonstration fictive — Élection présidentielle fictive</span>
   </div>
   <footer class="site-footer" role="contentinfo">
-    <p>© Vote Citoyen — Projet statique sans backend.</p>
+    <p>© Vote Citoyen — Projet statique sans backend. Aucune donnée personnelle n'est collectée ni stockée.</p>
   </footer>
 
   <script src="script.js" defer></script>

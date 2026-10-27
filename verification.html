@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vote Citoyen — Vérification</title>
+  <meta name="description" content="Vérification fictive de l'identité et de l'éligibilité." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="logo" aria-label="Vote Citoyen — Accueil">
+        <span class="logo-icon" aria-hidden="true">V</span>
+        Vote Citoyen
+      </a>
+      <nav class="nav-main" aria-label="Navigation principale">
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="connexion.html">Connexion</a></li>
+          <li><a href="verification.html" aria-current="page">Vérification</a></li>
+          <li><a href="vote.html">Bulletin</a></li>
+          <li><a href="resultat.html">Résultats</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="verification-section" aria-label="Vérification fictive">
+      <h1>Vérification fictive</h1>
+      <p class="subtitle">Cette étape est purement illustrative. Aucune caméra n'est activée, aucun document réel n'est demandé et aucune donnée biométrique n'est collectée.</p>
+
+      <div class="progress-indicator" aria-label="Progression de la vérification">
+        <div class="progress-step active" aria-current="step">
+          <span class="step-number">1</span>
+          <span class="step-label">Identité</span>
+        </div>
+        <div class="progress-line"></div>
+        <div class="progress-step" aria-current="false">
+          <span class="step-number">2</span>
+          <span class="step-label">Visage</span>
+        </div>
+      </div>
+
+      <article class="verification-panel" id="panel-identite" aria-label="Lecture simulée de la carte d'identité">
+        <h2>Lecture simulée de la carte d'identité</h2>
+        <p>Cette simulation illustre le contrôle d'une pièce d'identité dans le cadre de la démonstration fictive.</p>
+        <div class="sim-state" id="sim-identite-state" aria-live="polite">
+          <span class="sim-icon" aria-hidden="true">⏳</span>
+          <span>En attente de simulation</span>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="simulateIdentite()" aria-label="Simuler la lecture de la carte d'identité">Simuler la lecture</button>
+      </article>
+
+      <article class="verification-panel hidden" id="panel-visage" aria-label="Vérification simulée du visage">
+        <h2>Vérification simulée du visage</h2>
+        <p>Cette simulation illustre la vérification d'éligibilité par reconnaissance faciale dans le cadre de la démonstration fictive.</p>
+        <div class="sim-state" id="sim-visage-state" aria-live="polite">
+          <span class="sim-icon" aria-hidden="true">⏳</span>
+          <span>En attente de simulation</span>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="simulateVisage()" aria-label="Simuler la vérification du visage">Simuler la vérification</button>
+      </article>
+
+      <div class="verification-actions">
+        <a href="vote.html" class="btn btn-secondary" id="btn-continuer" style="display:none;">Continuer vers le bulletin</a>
+      </div>
+    </section>
+  </main>
+
+  <div class="prototype-banner" role="note" aria-label="Avertissement prototype">
+    <span>Prototype scolaire — démonstration fictive — Élection présidentielle fictive</span>
+  </div>
+  <footer class="site-footer" role="contentinfo">
+    <p>© Vote Citoyen — Projet statique sans backend. Aucune donnée personnelle n'est collectée ni stockée.</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

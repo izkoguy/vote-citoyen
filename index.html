@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vote Citoyen — Accueil</title>
-  <meta name="description" content="Vote Citoyen : participez au débat démocratique." />
+  <meta name="description" content="Vote Citoyen : prototype scolaire d'une élection présidentielle fictive." />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -16,10 +16,11 @@
       </a>
       <nav class="nav-main" aria-label="Navigation principale">
         <ul>
-          <li><a href="index.html">Accueil</a></li>
+          <li><a href="index.html" aria-current="page">Accueil</a></li>
           <li><a href="connexion.html">Connexion</a></li>
-          <li><a href="vote.html">Vote</a></li>
-          <li><a href="resultat.html">Résultat</a></li>
+          <li><a href="verification.html">Vérification</a></li>
+          <li><a href="vote.html">Bulletin</a></li>
+          <li><a href="resultat.html">Résultats</a></li>
         </ul>
       </nav>
     </div>
@@ -29,18 +30,40 @@
     <section class="hero" aria-label="Présentation du projet">
       <div class="hero-text">
         <h1>Vote Citoyen</h1>
-        <p>Participez au débat démocratique en exprimant votre choix sur des sujets d'intérêt public. Un parcours simple, transparent et accessible à tous.</p>
-        <a href="connexion.html" class="btn btn-primary">Commencer</a>
+        <p class="subtitle">Prototype scolaire — démonstration fictive — Élection présidentielle fictive</p>
+        <p>Découvrez un parcours de vote numérique moderne dans le cadre d'une élection présidentielle fictive. Ce prototype illustre une vérification d'identité simulée, un bulletin de vote et des résultats différés et fictifs.</p>
+        <a href="connexion.html" class="btn btn-primary">Commencer la démonstration</a>
       </div>
-      <img src="references/Accueil.png" alt="Illustration du projet Vote Citoyen" class="hero-img" loading="eager" />
+    </section>
+
+    <section class="info-section" aria-label="Informations sur le projet">
+      <h2>Un parcours complet et fictif</h2>
+      <div class="info-grid">
+        <article class="info-card">
+          <h3>Connexion</h3>
+          <p>Formulaire simulé permettant d'entrer dans la démonstration sans saisir de données réelles.</p>
+        </article>
+        <article class="info-card">
+          <h3>Vérification fictive</h3>
+          <p>Deux étapes illustratives : lecture simulée d'une carte d'identité et vérification simulée du visage.</p>
+        </article>
+        <article class="info-card">
+          <h3>Bulletin</h3>
+          <p>Présentation des six candidats à la présidence dans un bulletin numérique clair et accessible.</p>
+        </article>
+        <article class="info-card">
+          <h3>Résultats différés</h3>
+          <p>Affichage de résultats fixes et fictifs après un délai simulé, avec un diagramme statique.</p>
+        </article>
+      </div>
     </section>
   </main>
 
   <div class="prototype-banner" role="note" aria-label="Avertissement prototype">
-    <span>Prototype scolaire — démonstration fictive</span>
+    <span>Prototype scolaire — démonstration fictive — Élection présidentielle fictive</span>
   </div>
   <footer class="site-footer" role="contentinfo">
-    <p>© Vote Citoyen — Projet statique sans backend.</p>
+    <p>© Vote Citoyen — Projet statique sans backend. Aucune donnée personnelle n'est collectée ni stockée.</p>
   </footer>
 
   <script src="script.js" defer></script>

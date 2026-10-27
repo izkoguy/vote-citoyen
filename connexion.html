@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vote Citoyen — Connexion</title>
-  <meta name="description" content="Connexion au service Vote Citoyen." />
+  <meta name="description" content="Connexion au service Vote Citoyen — démonstration fictive." />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -17,9 +17,10 @@
       <nav class="nav-main" aria-label="Navigation principale">
         <ul>
           <li><a href="index.html">Accueil</a></li>
-          <li><a href="connexion.html">Connexion</a></li>
-          <li><a href="vote.html">Vote</a></li>
-          <li><a href="resultat.html">Résultat</a></li>
+          <li><a href="connexion.html" aria-current="page">Connexion</a></li>
+          <li><a href="verification.html">Vérification</a></li>
+          <li><a href="vote.html">Bulletin</a></li>
+          <li><a href="resultat.html">Résultats</a></li>
         </ul>
       </nav>
     </div>
@@ -28,29 +29,30 @@
   <main>
     <section class="form-card" aria-label="Formulaire de connexion">
       <h2>Se connecter</h2>
-      <p class="subtitle">Accédez à votre espace de vote citoyen.</p>
+      <p class="subtitle">Accédez à la démonstration fictive de l'élection présidentielle.</p>
+      <p class="demo-note">Aucune donnée réelle n'est requise. Vous pouvez continuer directement via le bouton de démonstration.</p>
       <form id="login-form" novalidate>
         <div class="form-group">
           <label for="email">Adresse électronique</label>
-          <input type="email" id="email" name="email" placeholder="exemple@domaine.fr" autocomplete="email" required aria-required="true" />
+          <input type="email" id="email" name="email" placeholder="exemple@domaine.fr" autocomplete="email" aria-required="false" />
         </div>
         <div class="form-group">
           <label for="password">Mot de passe</label>
-          <input type="password" id="password" name="password" placeholder="Votre mot de passe" autocomplete="current-password" required aria-required="true" />
+          <input type="password" id="password" name="password" placeholder="Votre mot de passe" autocomplete="current-password" aria-required="false" />
         </div>
         <div class="form-actions">
           <button type="submit" class="btn btn-primary">Se connecter</button>
-          <a href="index.html" class="btn btn-secondary">Annuler</a>
+          <a href="verification.html" class="btn btn-secondary">Passer la démonstration</a>
         </div>
       </form>
     </section>
   </main>
 
   <div class="prototype-banner" role="note" aria-label="Avertissement prototype">
-    <span>Prototype scolaire — démonstration fictive</span>
+    <span>Prototype scolaire — démonstration fictive — Élection présidentielle fictive</span>
   </div>
   <footer class="site-footer" role="contentinfo">
-    <p>© Vote Citoyen — Projet statique sans backend.</p>
+    <p>© Vote Citoyen — Projet statique sans backend. Aucune donnée personnelle n'est collectée ni stockée.</p>
   </footer>
 
   <script src="script.js" defer></script>

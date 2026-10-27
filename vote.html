@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vote Citoyen — Vote</title>
-  <meta name="description" content="Exprimez votre choix sur le sujet du jour." />
+  <title>Vote Citoyen — Bulletin</title>
+  <meta name="description" content="Bulletin de l'élection présidentielle fictive." />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -18,58 +18,87 @@
         <ul>
           <li><a href="index.html">Accueil</a></li>
           <li><a href="connexion.html">Connexion</a></li>
-          <li><a href="vote.html">Vote</a></li>
-          <li><a href="resultat.html">Résultat</a></li>
+          <li><a href="verification.html">Vérification</a></li>
+          <li><a href="vote.html" aria-current="page">Bulletin</a></li>
+          <li><a href="resultat.html">Résultats</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main>
-    <section aria-label="Vote en cours">
-      <h1>Votre choix</h1>
-      <p>Sélectionnez l'option qui correspond le mieux à votre position.</p>
+    <section aria-label="Bulletin de vote">
+      <h1>Bulletin — Élection présidentielle fictive</h1>
+      <p class="subtitle">Sélectionnez le candidat de votre choix. Ce choix est illustratif et n'est pas comptabilisé.</p>
+      <p class="demo-note">Tous les noms et résultats sont fictifs. Aucune donnée n'est enregistrée.</p>
 
-      <form id="vote-form" class="vote-grid" aria-label="Options de vote">
-        <label class="vote-card" for="opt-a">
-          <input type="radio" id="opt-a" name="option" value="A" />
+      <form id="vote-form" class="vote-grid" aria-label="Candidats à la présidence">
+        <label class="vote-card" for="candidat-delarbre">
+          <input type="radio" id="candidat-delarbre" name="candidat" value="delarbre" />
           <div class="card-body">
-            <h3 class="card-title">Option A</h3>
-            <p class="card-desc">Favoriser la transition écologique par des investissements publics ciblés.</p>
+            <h3 class="card-title">Monsieur Delarbre</h3>
+            <p class="card-desc">Candidat à la présidence — démonstration fictive.</p>
             <span class="select-btn">Sélectionner</span>
           </div>
         </label>
 
-        <label class="vote-card" for="opt-b">
-          <input type="radio" id="opt-b" name="option" value="B" />
+        <label class="vote-card" for="candidat-jeremy">
+          <input type="radio" id="candidat-jeremy" name="candidat" value="jeremy" />
           <div class="card-body">
-            <h3 class="card-title">Option B</h3>
-            <p class="card-desc">Maintenir le statu quo avec des ajustements progressifs.</p>
+            <h3 class="card-title">Jérémy</h3>
+            <p class="card-desc">Candidat à la présidence — démonstration fictive.</p>
             <span class="select-btn">Sélectionner</span>
           </div>
         </label>
 
-        <label class="vote-card" for="opt-c">
-          <input type="radio" id="opt-c" name="option" value="C" />
+        <label class="vote-card" for="candidat-nahil">
+          <input type="radio" id="candidat-nahil" name="candidat" value="nahil" />
           <div class="card-body">
-            <h3 class="card-title">Option C</h3>
-            <p class="card-desc">Réformer en profondeur avec un nouveau cadre législatif.</p>
+            <h3 class="card-title">Nahil</h3>
+            <p class="card-desc">Candidat à la présidence — démonstration fictive.</p>
             <span class="select-btn">Sélectionner</span>
           </div>
         </label>
 
-        <div style="grid-column: 1 / -1; text-align: center; margin-top: 1rem;">
-          <button type="submit" class="btn btn-primary">Valider mon vote</button>
+        <label class="vote-card" for="candidat-lea">
+          <input type="radio" id="candidat-lea" name="candidat" value="lea" />
+          <div class="card-body">
+            <h3 class="card-title">Michou</h3>
+            <p class="card-desc">Candidat à la présidence — démonstration fictive.</p>
+            <span class="select-btn">Sélectionner</span>
+          </div>
+        </label>
+
+        <label class="vote-card" for="candidat-thomas">
+          <input type="radio" id="candidat-thomas" name="candidat" value="thomas" />
+          <div class="card-body">
+            <h3 class="card-title">Michael Jackson</h3>
+            <p class="card-desc">Candidat à la présidence — démonstration fictive.</p>
+            <span class="select-btn">Sélectionner</span>
+          </div>
+        </label>
+
+        <label class="vote-card" for="candidat-camille">
+          <input type="radio" id="candidat-camille" name="candidat" value="camille" />
+          <div class="card-body">
+            <h3 class="card-title">Jul</h3>
+            <p class="card-desc">Candidat à la présidence — démonstration fictive.</p>
+            <span class="select-btn">Sélectionner</span>
+          </div>
+        </label>
+
+        <div class="vote-actions">
+          <button type="submit" class="btn btn-primary">Confirmer mon choix</button>
         </div>
       </form>
     </section>
   </main>
 
   <div class="prototype-banner" role="note" aria-label="Avertissement prototype">
-    <span>Prototype scolaire — démonstration fictive</span>
+    <span>Prototype scolaire — démonstration fictive — Élection présidentielle fictive</span>
   </div>
   <footer class="site-footer" role="contentinfo">
-    <p>© Vote Citoyen — Projet statique sans backend.</p>
+    <p>© Vote Citoyen — Projet statique sans backend. Aucune donnée personnelle n'est collectée ni stockée.</p>
   </footer>
 
   <script src="script.js" defer></script>
