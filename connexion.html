@@ -17,13 +17,17 @@
         Vote Citoyen
       </a>
       <nav class="nav-main" aria-label="Navigation principale">
-        <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="connexion.html" aria-current="page">Connexion</a></li>
-          <li><a href="verification.html">Vérification</a></li>
-          <li><a href="vote.html">Bulletin</a></li>
-          <li><a href="resultat.html">Résultats</a></li>
-        </ul>
+        <div class="preview-state-wrapper" aria-label="Menu Preview State">
+          <label for="preview-state" class="preview-state-label">Preview State</label>
+          <select id="preview-state" class="preview-state-select" aria-label="Sélectionner un état de prévisualisation" onchange="if(this.value){window.location.href=this.value;}">
+            <option value="" disabled>Preview State</option>
+            <option value="index.html">Accueil</option>
+            <option value="connexion.html" selected>Connexion</option>
+            <option value="verification.html">Vérification</option>
+            <option value="vote.html">Bulletin</option>
+            <option value="resultat.html">Résultats</option>
+          </select>
+        </div>
         <a href="connexion.html" id="nav-login-btn" class="nav-login-btn" aria-label="Se connecter">Se connecter</a>
         <div id="profile-wrapper" class="profile-wrapper" style="display:none;" aria-label="Menu profil">
           <button id="profile-btn" class="profile-btn" aria-label="Ouvrir le menu du profil" aria-expanded="false" aria-haspopup="true">
