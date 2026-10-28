@@ -83,6 +83,21 @@
       });
     }
 
+    const previewBtn = document.getElementById('preview-state-btn');
+    const previewMenu = document.getElementById('preview-state-menu');
+    if (previewBtn && previewMenu) {
+      previewBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (previewMenu.classList.contains('open')) {
+          previewMenu.classList.remove('open');
+          previewBtn.setAttribute('aria-expanded', 'false');
+        } else {
+          previewMenu.classList.add('open');
+          previewBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    }
+
     const logoutBtn = document.getElementById('profile-logout');
     if (logoutBtn) {
       logoutBtn.addEventListener('click', function (e) {
@@ -92,15 +107,52 @@
     }
 
     document.addEventListener('click', function (e) {
-      const wrapper = document.getElementById('profile-wrapper');
-      if (wrapper && !wrapper.contains(e.target)) {
+      const profileWrapper = document.getElementById('profile-wrapper');
+      if (profileWrapper && !profileWrapper.contains(e.target)) {
         closeProfileMenu();
+      }
+      const previewWrapper = document.getElementById('preview-state-btn');
+      const previewMenu = document.getElementById('preview-state-menu');
+      if (previewMenu && previewMenu.classList.contains('open')) {
+        if (!previewWrapper || !previewWrapper.contains(e.target)) {
+          previewMenu.classList.remove('open');
+          if (previewWrapper) previewWrapper.setAttribute('aria-expanded', 'false');
+        }
       }
     });
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeProfileMenu();
+      if (e.key === 'Escape') {
+        closeProfileMenu();
+        const previewMenu = document.getElementById('preview-state-menu');
+        const previewBtn = document.getElementById('preview-state-btn');
+        if (previewMenu && previewMenu.classList.contains('open')) {
+          previewMenu.classList.remove('open');
+          if (previewBtn) previewBtn.setAttribute('aria-expanded', 'false');
+        }
+      }
     });
+
+    // Récapitulatif du choix sur la page résultats
+    const recapEl = document.getElementById('recap-choix');
+    if (recapEl) {
+      const params = new URLSearchParams(window.location.search);
+      const choix = params.get('choix');
+      if (choix === 'blanc') {
+        recapEl.innerHTML = '<strong>Vote blanc</strong> — Vous avez choisi le vote blanc. Ce choix est distinct d\'un candidat et n\'est attribué à aucun d\'entre eux.';
+      } else if (choix) {
+        const noms = {
+          delarbre: 'Monsieur Delarbre',
+          jeremy: 'Jérémy',
+          nahil: 'Nahil',
+          lea: 'Michou',
+          thomas: 'Michael Jackson',
+          camille: 'Jul'
+        };
+        const nom = noms[choix] || choix;
+        recapEl.innerHTML = '<strong>' + nom + '</strong> — Votre choix a été enregistré dans le cadre de cette démonstration fictive. Aucun vote réel n\'a été transmis ni enregistré.';
+      }
+    }
   });
 
   // Connexion via formulaire
@@ -164,10 +216,11 @@
       e.preventDefault();
       const selected = document.querySelector('input[name="candidat"]:checked');
       if (!selected) {
-        alert('Veuillez sélectionner un candidat avant de valider.');
+        alert('Veuillez sélectionner un candidat ou le vote blanc avant de valider.');
         return;
       }
-      window.location.href = 'resultat.html';
+      const separator = 'resultat.html'.includes('?') ? '&' : '?';
+      window.location.href = 'resultat.html' + separator + 'choix=' + encodeURIComponent(selected.value);
     });
   }
 
@@ -184,4 +237,5 @@
     document.getElementById('results-section').classList.remove('hidden');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
 })();
