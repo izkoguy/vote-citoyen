@@ -65,8 +65,8 @@
         <h2>Lecture simulée de la carte d'identité</h2>
         <p>Cette simulation illustre le contrôle d'une pièce d'identité dans le cadre de la démonstration fictive.</p>
         <div class="sim-state" id="sim-identite-state" aria-live="polite">
-          <span class="sim-icon" aria-hidden="true">⏳</span>
-          <span>En attente de simulation</span>
+          <span class="sim-icon" aria-hidden="true">🪪</span>
+          <span>Scanner votre pièce d'identité</span>
         </div>
         <button type="button" class="btn btn-primary" onclick="simulateIdentite()" aria-label="Simuler la lecture de la carte d'identité">Simuler la lecture</button>
       </article>
@@ -75,14 +75,14 @@
         <h2>Vérification simulée du visage</h2>
         <p>Cette simulation illustre la vérification d'éligibilité par reconnaissance faciale dans le cadre de la démonstration fictive.</p>
         <div class="sim-state" id="sim-visage-state" aria-live="polite">
-          <span class="sim-icon" aria-hidden="true">⏳</span>
-          <span>En attente de simulation</span>
+          <span class="sim-icon" aria-hidden="true">👤</span>
+          <span>Scanner votre visage</span>
         </div>
         <button type="button" class="btn btn-primary" onclick="simulateVisage()" aria-label="Simuler la vérification du visage">Simuler la vérification</button>
       </article>
 
       <div class="verification-actions">
-        <a href="vote.html" class="btn btn-secondary" id="btn-continuer" style="display:none;">Continuer vers le bulletin</a>
+        <a href="vote.html?demo=1" class="btn btn-secondary" id="btn-continuer" style="display:none;">Continuer vers le bulletin</a>
       </div>
     </section>
   </main>

@@ -7,6 +7,7 @@
   'use strict';
 
   // État de connexion fictif (non persistant, paramètre URL minimal)
+  // Au chargement initial et après actualisation : toujours déconnecté
   window.isConnected = false;
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.has('demo')) {
@@ -220,7 +221,7 @@
         return;
       }
       const separator = 'resultat.html'.includes('?') ? '&' : '?';
-      window.location.href = 'resultat.html' + separator + 'choix=' + encodeURIComponent(selected.value);
+      window.location.href = 'resultat.html' + separator + 'choix=' + encodeURIComponent(selected.value) + '&demo=1';
     });
   }
 
