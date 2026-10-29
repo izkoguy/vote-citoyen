@@ -908,10 +908,12 @@ main {
   .profile-menu,
   .preview-state-menu {
     min-width: unset;
-    width: calc(100vw - 1.5rem);
-    max-width: calc(100vw - 1.5rem);
+    width: auto;
+    max-width: calc(100vw - 2rem);
     left: 0.25rem;
     right: auto;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
   }
   /* Décaler légèrement Preview State vers la droite sur mobile */
   .preview-state-wrapper {
