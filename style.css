@@ -912,8 +912,6 @@ main {
     max-width: calc(100vw - 2rem);
     left: 0.25rem;
     right: auto;
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
   }
   /* Décaler légèrement Preview State vers la droite sur mobile */
   .preview-state-wrapper {
@@ -922,5 +920,14 @@ main {
   .preview-state-menu {
     left: 0.5rem;
     right: auto;
+  }
+  /* Chaque intitulé sur une seule ligne, largeur selon contenu */
+  .profile-menu .menu-btn,
+  .preview-state-menu .menu-btn,
+  .profile-menu .menu-label,
+  .preview-state-menu .menu-label {
+    white-space: nowrap;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
 }
