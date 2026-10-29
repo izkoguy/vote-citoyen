@@ -879,4 +879,46 @@ main {
   .vote-grid { grid-template-columns: 1fr; }
   .verification-panel { padding: 1.5rem; }
   .confirmation-card, .waiting-card { padding: 2rem 1.5rem; }
+
+  /* Dropdowns mobile : rester dans l'écran, scroll si trop long */
+  .profile-menu,
+  .preview-state-menu {
+    right: auto;
+    left: 0;
+    max-width: calc(100vw - 1rem);
+    max-height: 70vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Si le menu est trop à droite, le ramener dans la vue */
+  .profile-wrapper,
+  .preview-state-wrapper {
+    position: relative;
+  }
+  .profile-menu.open,
+  .preview-state-menu.open {
+    left: 0;
+    right: auto;
+  }
+}
+
+/* Petits écrans étroits : ajustement fin des dropdowns */
+@media (max-width: 480px) {
+  .profile-menu,
+  .preview-state-menu {
+    min-width: unset;
+    width: calc(100vw - 1.5rem);
+    max-width: calc(100vw - 1.5rem);
+    left: 0.25rem;
+    right: auto;
+  }
+  /* Décaler légèrement Preview State vers la droite sur mobile */
+  .preview-state-wrapper {
+    margin-left: 0.75rem;
+  }
+  .preview-state-menu {
+    left: 0.5rem;
+    right: auto;
+  }
 }

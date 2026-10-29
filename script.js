@@ -32,6 +32,13 @@
     const btn = document.getElementById('profile-btn');
     if (menu) menu.classList.add('open');
     if (btn) btn.setAttribute('aria-expanded', 'true');
+    // Fermer Preview State si ouvert
+    const previewMenu = document.getElementById('preview-state-menu');
+    const previewBtn = document.getElementById('preview-state-btn');
+    if (previewMenu && previewMenu.classList.contains('open')) {
+      previewMenu.classList.remove('open');
+      if (previewBtn) previewBtn.setAttribute('aria-expanded', 'false');
+    }
   }
 
   function closeProfileMenu() {
@@ -95,6 +102,13 @@
         } else {
           previewMenu.classList.add('open');
           previewBtn.setAttribute('aria-expanded', 'true');
+          // Fermer Profil si ouvert
+          const profileMenu = document.getElementById('profile-menu');
+          const profileBtn = document.getElementById('profile-btn');
+          if (profileMenu && profileMenu.classList.contains('open')) {
+            profileMenu.classList.remove('open');
+            if (profileBtn) profileBtn.setAttribute('aria-expanded', 'false');
+          }
         }
       });
     }
