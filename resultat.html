@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vote Citoyen — Résultats</title>
-  <meta name="description" content="Résultats différés et fictifs de l'élection présidentielle fictive." />
+  <meta name="description" content="Résultats de l'élection présidentielle fictive." />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -45,88 +45,18 @@
   </header>
 
   <main>
-    <section id="confirmation-section" aria-label="Confirmation du bulletin">
-      <div class="confirmation-card">
-        <h2>Confirmation du bulletin</h2>
-        <p id="recap-choix">Votre choix a été enregistré dans le cadre de cette démonstration fictive. Aucun vote réel n'a été transmis ni enregistré.</p>
-        <p class="demo-note">Les résultats affichés sont différés et fictifs. Ils ne reflètent pas le choix que vous venez d'effectuer.</p>
-        <a href="#" onclick="showWaiting(); return false;" class="btn btn-primary">Voir les résultats</a>
-      </div>
-    </section>
-
-    <section id="waiting-section" class="hidden" aria-label="Attente des résultats">
-      <div class="waiting-card">
-        <h2>Résultats en cours de compilation</h2>
-        <p>Les résultats différés et fictifs sont en cours de traitement. Ce délai est purement simulé.</p>
-        <div class="waiting-spinner" aria-label="Chargement simulé">
-          <div class="spinner"></div>
-        </div>
-        <p class="demo-note">Pour faciliter la présentation scolaire, vous pouvez passer immédiatement ce délai.</p>
-        <button type="button" class="btn btn-primary" onclick="showResults()">Passer le délai et afficher les résultats</button>
-      </div>
-    </section>
-
-    <section id="results-section" class="hidden" aria-label="Résultats de l'élection présidentielle fictive">
+    <section id="results-section" aria-label="Résultats de l'élection présidentielle fictive">
       <h1>Résultats — Élection présidentielle fictive</h1>
-      <p class="subtitle">Résultats différés et fictifs — données fixes non liées au vote de l'utilisateur.</p>
+      <p class="subtitle">Résultats calculés à partir des votes enregistrés.</p>
 
       <div class="results-summary">
         <div class="results-chart" aria-label="Diagramme des résultats">
-          <div class="chart-row" aria-label="Monsieur Delarbre : 40 %">
-            <div class="chart-name">Monsieur Delarbre</div>
-            <div class="chart-bar-container">
-              <div class="chart-bar" style="width: 40%; background: var(--bleu-profond);"></div>
-            </div>
-            <div class="chart-percent">40 %</div>
-          </div>
-          <div class="chart-row" aria-label="Jérémy : 20 %">
-            <div class="chart-name">Jérémy</div>
-            <div class="chart-bar-container">
-              <div class="chart-bar" style="width: 20%; background: var(--bleu-moyen);"></div>
-            </div>
-            <div class="chart-percent">20 %</div>
-          </div>
-          <div class="chart-row" aria-label="Nahil : 12 %">
-            <div class="chart-name">Nahil</div>
-            <div class="chart-bar-container">
-              <div class="chart-bar" style="width: 12%; background: #2a5a8a;"></div>
-            </div>
-            <div class="chart-percent">12 %</div>
-          </div>
-          <div class="chart-row" aria-label="Michou : 12 %">
-            <div class="chart-name">Michou</div>
-            <div class="chart-bar-container">
-              <div class="chart-bar" style="width: 12%; background: #3a6a9a;"></div>
-            </div>
-            <div class="chart-percent">12 %</div>
-          </div>
-          <div class="chart-row" aria-label="Michael Jackson : 9 %">
-            <div class="chart-name">Michael Jackson</div>
-            <div class="chart-bar-container">
-              <div class="chart-bar" style="width: 9%; background: #4a7aaa;"></div>
-            </div>
-            <div class="chart-percent">9 %</div>
-          </div>
-          <div class="chart-row" aria-label="Jul : 2 %">
-            <div class="chart-name">Jul</div>
-            <div class="chart-bar-container">
-              <div class="chart-bar" style="width: 2%; background: #5a8aba;"></div>
-            </div>
-            <div class="chart-percent">2 %</div>
-          </div>
-          <div class="chart-row" aria-label="Vote blanc : 5 %">
-            <div class="chart-name">Vote blanc</div>
-            <div class="chart-bar-container">
-              <div class="chart-bar" style="width: 5%; background: #6a9aba;"></div>
-            </div>
-            <div class="chart-percent">5 %</div>
-          </div>
+          <!-- Les barres seront générées dynamiquement par script.js -->
         </div>
       </div>
 
-
-      <div style="text-align: center;">
-        <p class="demo-note" style="margin-bottom: 1.25rem;">Ces résultats sont fixes et fictifs. Ils ne sont pas calculés à partir d'un vote réel.</p>
+      <div style="text-align: center; margin-top: 2rem;">
+        <p class="demo-note" id="results-note" style="margin-bottom: 1.25rem;">Chargement des résultats…</p>
         <a href="index.html" class="btn btn-secondary">Recommencer la démonstration</a>
       </div>
     </section>
@@ -139,6 +69,7 @@
     <p>© Vote Citoyen — Projet statique sans backend. Aucune donnée personnelle n'est collectée ni stockée.</p>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="script.js" defer></script>
 </body>
 </html>

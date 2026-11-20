@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <link rel="icon" type="image/jpg" href="./assets/favfr.jpg" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vote Citoyen — Administration</title>
+  <meta name="description" content="Administration du scrutin Vote Citoyen." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Styles spécifiques à la page admin */
+    .admin-section {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .admin-card {
+      background: var(--blanc);
+      border: 1px solid #e8ecf0;
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 8px 30px var(--ombre);
+      margin-bottom: 1.5rem;
+    }
+    .admin-card h2 {
+      color: var(--bleu-profond);
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .admin-form-group {
+      margin-bottom: 1.25rem;
+    }
+    .admin-form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      color: var(--gris-texte);
+      font-size: 0.9rem;
+    }
+    .admin-form-group input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid #dde3e8;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background: var(--gris-clair);
+    }
+    .admin-form-group input:focus {
+      border-color: var(--bleu-profond);
+      box-shadow: 0 0 0 3px rgba(10,37,64,0.08);
+      outline: none;
+    }
+    .admin-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .admin-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.2s ease, background 0.2s ease;
+      box-shadow: 0 4px 14px rgba(10,37,64,0.15);
+    }
+    .admin-btn:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .admin-btn-primary {
+      background: var(--bleu-profond);
+      color: var(--blanc);
+    }
+    .admin-btn-primary:hover {
+      background: var(--bleu-moyen);
+      box-shadow: 0 6px 20px rgba(10,37,64,0.25);
+    }
+    .admin-btn-danger {
+      background: var(--accent);
+      color: var(--blanc);
+    }
+    .admin-btn-danger:hover {
+      background: #a00d24;
+      box-shadow: 0 6px 20px rgba(200,16,46,0.25);
+    }
+    .admin-btn-secondary {
+      background: var(--gris-clair);
+      color: var(--bleu-profond);
+      border: 1px solid #dde3e8;
+    }
+    .admin-btn-secondary:hover {
+      background: #e8ecf0;
+    }
+    .admin-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .admin-status {
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      font-weight: 600;
+      text-align: center;
+    }
+    .admin-status.success {
+      background: #e8f5e9;
+      color: #2e7d32;
+      border: 1px solid #c8e6c9;
+    }
+    .admin-status.error {
+      background: #fdeaea;
+      color: #c62828;
+      border: 1px solid #f5c6cb;
+    }
+    .admin-status.info {
+      background: #e3f2fd;
+      color: #1565c0;
+      border: 1px solid #bbdefb;
+    }
+    .vote-count {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--bleu-profond);
+      text-align: center;
+      margin: 1rem 0;
+    }
+    .vote-count-label {
+      color: #777;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="logo" aria-label="Vote Citoyen — Accueil">
+        <span class="logo-icon" aria-hidden="true">V</span>
+        Vote Citoyen
+      </a>
+      <nav class="nav-main" aria-label="Navigation principale">
+        <div class="preview-state-wrapper" aria-label="Menu Preview State">
+          <span class="preview-state-label">Preview State</span>
+          <button id="preview-state-btn" class="preview-state-btn" aria-label="Ouvrir le menu Preview State" aria-expanded="false" aria-haspopup="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div id="preview-state-menu" class="preview-state-menu" role="menu" aria-label="Menu Preview State">
+            <span class="menu-label">Preview State</span>
+            <a href="index.html" class="menu-btn" role="menuitem">1 - Accueil</a>
+            <a href="connexion.html" class="menu-btn" role="menuitem">2 - Connexion</a>
+            <a href="verification.html" class="menu-btn" role="menuitem">3 - Vérification</a>
+            <a href="vote.html" class="menu-btn" role="menuitem">4 - Bulletin</a>
+            <a href="resultat.html" class="menu-btn" role="menuitem">5 - Résultats</a>
+          </div>
+        </div>
+        <a href="connexion.html" id="nav-login-btn" class="nav-login-btn" aria-label="Se connecter">Se connecter</a>
+        <div id="profile-wrapper" class="profile-wrapper" style="display:none;" aria-label="Menu profil">
+          <button id="profile-btn" class="profile-btn" aria-label="Ouvrir le menu du profil" aria-expanded="false" aria-haspopup="true">
+            <img src="assets/profile-icon.svg" alt="" aria-hidden="true" style="width:20px;height:20px;display:block;" />
+          </button>
+          <div id="profile-menu" class="profile-menu" role="menu" aria-label="Menu du profil">
+            <span class="menu-label">Preview Account</span>
+            <button id="profile-logout" class="menu-btn" role="menuitem">Se déconnecter</button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="admin-section" aria-label="Administration du scrutin">
+      <div class="admin-card">
+        <h1>Administration du scrutin</h1>
+        <p class="subtitle">Gestion de l'élection présidentielle fictive</p>
+        
+        <div class="admin-form-group">
+          <label for="admin-code">Code administrateur</label>
+          <input type="password" id="admin-code" placeholder="Entrez le code secret" autocomplete="off" />
+        </div>
+        
+        <div class="vote-count-label">Votes enregistrés</div>
+        <div class="vote-count" id="vote-count">—</div>
+        
+        <div class="admin-actions">
+          <button type="button" class="admin-btn admin-btn-primary" id="btn-open" disabled>Ouvrir le scrutin</button>
+          <button type="button" class="admin-btn admin-btn-primary" id="btn-close" disabled>Fermer le scrutin</button>
+          <button type="button" class="admin-btn admin-btn-secondary" id="btn-count" disabled>Actualiser le compteur</button>
+          <button type="button" class="admin-btn admin-btn-danger" id="btn-reset" disabled>Réinitialiser les votes</button>
+        </div>
+        
+        <div id="admin-status" class="admin-status" style="display:none;"></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="prototype-banner" role="note" aria-label="Avertissement prototype">
+    <span>Prototype scolaire — démonstration fictive — Élection présidentielle fictive</span>
+  </div>
+  <footer class="site-footer" role="contentinfo">
+    <p>© Vote Citoyen — Projet statique sans backend. Aucune donnée personnelle n'est collectée ni stockée.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
