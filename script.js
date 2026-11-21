@@ -324,7 +324,7 @@ window.simulateIdentite = function () {
   const state = document.getElementById('sim-identite-state');
   const btn = document.querySelector('#panel-identite button');
   if (!state || !btn) return;
-  state.innerHTML = '<span class="sim-icon" aria-hidden="true">✓</span><span>Simulation réussie — démonstration fictive</span>';
+  state.innerHTML = '<span class="sim-icon" aria-hidden="true">✓</span><span>Simulation réussie — prototype scolaire</span>';
   state.classList.add('success');
   btn.textContent = 'Simulation terminée';
   btn.disabled = true;
@@ -340,7 +340,7 @@ window.simulateVisage = function () {
   const state = document.getElementById('sim-visage-state');
   const btn = document.querySelector('#panel-visage button');
   if (!state || !btn) return;
-  state.innerHTML = '<span class="sim-icon" aria-hidden="true">✓</span><span>Simulation réussie — démonstration fictive</span>';
+  state.innerHTML = '<span class="sim-icon" aria-hidden="true">✓</span><span>Simulation réussie — prototype scolaire</span>';
   state.classList.add('success');
   btn.textContent = 'Simulation terminée';
   btn.disabled = true;

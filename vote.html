@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vote Citoyen — Bulletin</title>
-  <meta name="description" content="Bulletin de l'élection présidentielle fictive." />
+  <meta name="description" content="Bulletin de vote du scrutin Vote Citoyen." />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -33,16 +33,16 @@
 
   <main>
     <section aria-label="Bulletin de vote">
-      <h1>Bulletin — Élection présidentielle fictive</h1>
-      <p class="subtitle">Sélectionnez le candidat de votre choix. Votre vote sera enregistré définitivement.</p>
-      <p class="demo-note">Tous les noms sont fictifs. Votre vote est réel et ne peut pas être modifié.</p>
+      <h1>Bulletin — Scrutin Vote Citoyen</h1>
+      <p class="subtitle">Sélectionnez le candidat de votre choix. Votre vote sera enregistré dans le système de vote.</p>
+      <p class="demo-note">Votre vote est réel et ne peut pas être modifié.</p>
 
       <form id="vote-form" class="vote-grid" aria-label="Candidats à la présidence">
         <label class="vote-card" for="candidat-delarbre">
           <input type="radio" id="candidat-delarbre" name="candidat" value="delarbre" />
           <div class="card-body">
             <h3 class="card-title">Monsieur Delarbre</h3>
-            <p class="card-desc">Candidat à la présidence — démonstration fictive.</p>
+            <p class="card-desc">Candidat au scrutin Vote Citoyen.</p>
             <span class="select-btn">Sélectionner</span>
           </div>
         </label>
@@ -51,7 +51,7 @@
           <input type="radio" id="candidat-jeremy" name="candidat" value="jeremy" />
           <div class="card-body">
             <h3 class="card-title">Jérémy</h3>
-            <p class="card-desc">Candidat à la présidence — démonstration fictive.</p>
+            <p class="card-desc">Candidat au scrutin Vote Citoyen.</p>
             <span class="select-btn">Sélectionner</span>
           </div>
         </label>
@@ -60,7 +60,7 @@
           <input type="radio" id="candidat-nahil" name="candidat" value="nahil" />
           <div class="card-body">
             <h3 class="card-title">Nahil</h3>
-            <p class="card-desc">Candidat à la présidence — démonstration fictive.</p>
+            <p class="card-desc">Candidat au scrutin Vote Citoyen.</p>
             <span class="select-btn">Sélectionner</span>
           </div>
         </label>
@@ -69,7 +69,7 @@
           <input type="radio" id="candidat-lea" name="candidat" value="lea" />
           <div class="card-body">
             <h3 class="card-title">Michou</h3>
-            <p class="card-desc">Candidat à la présidence — démonstration fictive.</p>
+            <p class="card-desc">Candidat au scrutin Vote Citoyen.</p>
             <span class="select-btn">Sélectionner</span>
           </div>
         </label>
@@ -78,7 +78,7 @@
           <input type="radio" id="candidat-thomas" name="candidat" value="thomas" />
           <div class="card-body">
             <h3 class="card-title">Michael Jackson</h3>
-            <p class="card-desc">Candidat à la présidence — démonstration fictive.</p>
+            <p class="card-desc">Candidat au scrutin Vote Citoyen.</p>
             <span class="select-btn">Sélectionner</span>
           </div>
         </label>
@@ -87,7 +87,7 @@
           <input type="radio" id="candidat-camille" name="candidat" value="camille" />
           <div class="card-body">
             <h3 class="card-title">Jul</h3>
-            <p class="card-desc">Candidat à la présidence — démonstration fictive.</p>
+            <p class="card-desc">Candidat au scrutin Vote Citoyen.</p>
             <span class="select-btn">Sélectionner</span>
           </div>
         </label>
@@ -109,10 +109,10 @@
   </main>
 
   <div class="prototype-banner" role="note" aria-label="Avertissement prototype">
-    <span>Prototype scolaire — démonstration fictive — Élection présidentielle fictive</span>
+    <span>Prototype scolaire</span>
   </div>
   <footer class="site-footer" role="contentinfo">
-    <p>© Vote Citoyen — Projet statique sans backend. Aucune donnée personnelle n'est collectée ni stockée.</p>
+    <p>© Vote Citoyen — Système de vote avec backend Supabase. Aucune donnée personnelle n'est collectée ni stockée.</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

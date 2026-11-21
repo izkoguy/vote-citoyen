@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vote Citoyen — Vérification</title>
-  <meta name="description" content="Vérification fictive de l'identité et de l'éligibilité." />
+  <meta name="description" content="Vérification d'identité et d'éligibilité du scrutin Vote Citoyen." />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -32,9 +32,9 @@
   </header>
 
   <main>
-    <section class="verification-section" aria-label="Vérification fictive">
-      <h1>Vérification fictive</h1>
-      <p class="subtitle">Cette étape est purement illustrative. Aucune caméra n'est activée, aucun document réel n'est demandé et aucune donnée biométrique n'est collectée.</p>
+    <section class="verification-section" aria-label="Vérification d'identité">
+      <h1>Vérification d'identité</h1>
+      <p class="subtitle">Cette étape vérifie votre identité et votre éligibilité. Aucune caméra n'est activée, aucun document réel n'est demandé et aucune donnée biométrique n'est collectée.</p>
 
       <div class="progress-indicator" aria-label="Progression de la vérification">
         <div class="progress-step active" aria-current="step">
@@ -48,9 +48,9 @@
         </div>
       </div>
 
-      <article class="verification-panel" id="panel-identite" aria-label="Lecture simulée de la carte d'identité">
-        <h2>Lecture simulée de la carte d'identité</h2>
-        <p>Cette simulation illustre le contrôle d'une pièce d'identité dans le cadre de la démonstration fictive.</p>
+      <article class="verification-panel" id="panel-identite" aria-label="Lecture de la carte d'identité">
+        <h2>Lecture de la carte d'identité</h2>
+        <p>Cette étape illustre le contrôle d'une pièce d'identité dans le cadre du prototype scolaire.</p>
         <div class="sim-state" id="sim-identite-state" aria-live="polite">
           <span class="sim-icon" aria-hidden="true">🪪</span>
           <span>Scanner votre pièce d'identité</span>
@@ -58,9 +58,9 @@
         <button type="button" class="btn btn-primary" onclick="simulateIdentite()" aria-label="Simuler la lecture de la carte d'identité">Simuler la lecture</button>
       </article>
 
-      <article class="verification-panel hidden" id="panel-visage" aria-label="Vérification simulée du visage">
-        <h2>Vérification simulée du visage</h2>
-        <p>Cette simulation illustre la vérification d'éligibilité par reconnaissance faciale dans le cadre de la démonstration fictive.</p>
+      <article class="verification-panel hidden" id="panel-visage" aria-label="Vérification du visage">
+        <h2>Vérification du visage</h2>
+        <p>Cette étape illustre la vérification d'éligibilité par reconnaissance faciale dans le cadre du prototype scolaire.</p>
         <div class="sim-state" id="sim-visage-state" aria-live="polite">
           <span class="sim-icon" aria-hidden="true">👤</span>
           <span>Scanner votre visage</span>
@@ -75,10 +75,10 @@
   </main>
 
   <div class="prototype-banner" role="note" aria-label="Avertissement prototype">
-    <span>Prototype scolaire — démonstration fictive — Élection présidentielle fictive</span>
+    <span>Prototype scolaire</span>
   </div>
   <footer class="site-footer" role="contentinfo">
-    <p>© Vote Citoyen — Projet statique sans backend. Aucune donnée personnelle n'est collectée ni stockée.</p>
+    <p>© Vote Citoyen — Système de vote avec backend Supabase. Aucune donnée personnelle n'est collectée ni stockée.</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
