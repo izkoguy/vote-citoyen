@@ -89,5 +89,5 @@ $$;
 -- DONNÉES INITIALES
 -- ============================================
 
--- Insérer la ligne unique pour le scrutin (fermé par défaut)
-INSERT INTO scrutin (ouvert) VALUES (false);
+-- Insérer la ligne unique pour le scrutin (OUVERT par défaut pour tests)
+INSERT INTO scrutin (ouvert) VALUES (true);
