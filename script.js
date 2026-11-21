@@ -4,7 +4,7 @@
  */
 
 // Configuration Supabase - À REMPLIR AVEC VOS CLÉS
-const SUPABASE_URL = 'https://gdnvbjmxukdgmkvwngob.supabaseClient.co';
+const SUPABASE_URL = 'https://gdnvbjmxukdgmkvwngob.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_YP0k0VVFyKdvn9zlL8frYA_liKWDJJ1';
 
 // Client Supabase global
@@ -28,7 +28,7 @@ async function initSupabase() {
     return;
   }
   
-  supabase = window.supabaseClient.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   
   // Authentification anonyme automatique
   const { data: { session } } = await supabaseClient.auth.getSession();
@@ -49,7 +49,7 @@ async function initSupabase() {
 
 // Helpers communs
 async function getScrutinState() {
-  if (!supabase) await initSupabase();
+  if (!supabaseClient) await initSupabase();
   const { data, error } = await supabaseClient.from('scrutin').select('ouvert').single();
   if (error) {
     console.error('Erreur lecture scrutin:', error.message);
