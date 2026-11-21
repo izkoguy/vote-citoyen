@@ -12,3 +12,6 @@ build/
 .vscode/
 *.swp
 *.swo
+
+# Configuration locale (contient des secrets)
+.roo/mcp.json
