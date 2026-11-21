@@ -96,6 +96,18 @@ document.addEventListener('DOMContentLoaded', async function () {
       window.location.href = 'connexion.html';
     });
   }
+
+  const btnCommencerVote = document.getElementById('btn-commencer-vote');
+  if (btnCommencerVote) {
+    btnCommencerVote.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (isConnected) {
+        window.location.href = 'verification.html';
+      } else {
+        window.location.href = 'connexion.html';
+      }
+    });
+  }
   
   const navResultsBtn = document.getElementById('nav-results-btn');
   if (navResultsBtn) {
@@ -149,10 +161,16 @@ document.addEventListener('DOMContentLoaded', async function () {
 });
 
 // ============================================
-// NAVIGATION / PROFIL (inchangé)
+// NAVIGATION / PROFIL (avec sessionStorage pour persistance)
 // ============================================
 
-let isConnected = false;
+const STORAGE_KEY = 'isLoggedIn';
+
+function getInitialConnectionState() {
+  return sessionStorage.getItem(STORAGE_KEY) === 'true';
+}
+
+let isConnected = getInitialConnectionState();
 
 function updateNavState() {
   const btn = document.getElementById('nav-login-btn');
@@ -196,11 +214,13 @@ function toggleProfileMenu() {
 
 function connectUser() {
   isConnected = true;
+  sessionStorage.setItem(STORAGE_KEY, 'true');
   updateNavState();
 }
 
 function disconnectUser() {
   isConnected = false;
+  sessionStorage.removeItem(STORAGE_KEY);
   closeProfileMenu();
   updateNavState();
   updateResultsButton();
