@@ -1,0 +1,15 @@
+
+{
+  "mcpServers": {
+    "supabase": {
+      "type": "streamable-http",
+      "url": "https://mcp.supabase.com/mcp?project_ref=gdnvbjmxukdgmkvwngob&read_only=true&features=database,docs,debugging,development,functions",
+      "headers": {
+        "Authorization": "Bearer sbp_fcffa244704038c3303d2f80331f935dff285658"
+      },
+      "disabled": false,
+      "alwaysAllow": [],
+      "timeout": 120
+    }
+  }
+}

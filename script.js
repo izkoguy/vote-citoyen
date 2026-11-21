@@ -85,8 +85,9 @@ document.addEventListener('DOMContentLoaded', async function () {
   // Initialiser Supabase dès que possible
   await initSupabase();
   
-  // Navigation commune (inchangée)
+  // Navigation commune
   updateNavState();
+  await updateResultsButton();
   
   const navLoginBtn = document.getElementById('nav-login-btn');
   if (navLoginBtn) {
@@ -96,32 +97,19 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
   }
   
+  const navResultsBtn = document.getElementById('nav-results-btn');
+  if (navResultsBtn) {
+    navResultsBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      handleResultsClick();
+    });
+  }
+  
   const profileBtn = document.getElementById('profile-btn');
   if (profileBtn) {
     profileBtn.addEventListener('click', function (e) {
       e.stopPropagation();
       toggleProfileMenu();
-    });
-  }
-  
-  const previewBtn = document.getElementById('preview-state-btn');
-  const previewMenu = document.getElementById('preview-state-menu');
-  if (previewBtn && previewMenu) {
-    previewBtn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      if (previewMenu.classList.contains('open')) {
-        previewMenu.classList.remove('open');
-        previewBtn.setAttribute('aria-expanded', 'false');
-      } else {
-        previewMenu.classList.add('open');
-        previewBtn.setAttribute('aria-expanded', 'true');
-        const profileMenu = document.getElementById('profile-menu');
-        const profileBtn = document.getElementById('profile-btn');
-        if (profileMenu && profileMenu.classList.contains('open')) {
-          profileMenu.classList.remove('open');
-          if (profileBtn) profileBtn.setAttribute('aria-expanded', 'false');
-        }
-      }
     });
   }
   
@@ -138,25 +126,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (profileWrapper && !profileWrapper.contains(e.target)) {
       closeProfileMenu();
     }
-    const previewWrapper = document.getElementById('preview-state-btn');
-    const previewMenu = document.getElementById('preview-state-menu');
-    if (previewMenu && previewMenu.classList.contains('open')) {
-      if (!previewWrapper || !previewWrapper.contains(e.target)) {
-        previewMenu.classList.remove('open');
-        if (previewWrapper) previewWrapper.setAttribute('aria-expanded', 'false');
-      }
-    }
   });
   
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
       closeProfileMenu();
-      const previewMenu = document.getElementById('preview-state-menu');
-      const previewBtn = document.getElementById('preview-state-btn');
-      if (previewMenu && previewMenu.classList.contains('open')) {
-        previewMenu.classList.remove('open');
-        if (previewBtn) previewBtn.setAttribute('aria-expanded', 'false');
-      }
     }
   });
   
@@ -229,11 +203,98 @@ function disconnectUser() {
   isConnected = false;
   closeProfileMenu();
   updateNavState();
+  updateResultsButton();
   window.location.href = 'index.html';
 }
 
 // ============================================
-// PAGE CONNEXION (simplifiée - juste navigation)
+// NAVBAR INTELLIGENTE - GESTION BOUTON RÉSULTATS
+// ============================================
+
+// Vérifier si l'utilisateur actuel a déjà voté
+async function checkUserHasVoted() {
+  if (!supabaseClient) return false;
+  try {
+    const { data: { user } } = await supabaseClient.auth.getUser();
+    if (!user) return false;
+    
+    const { data, error } = await supabaseClient
+      .from('votes')
+      .select('id')
+      .eq('user_id', user.id)
+      .single();
+    
+    return !error && !!data;
+  } catch (err) {
+    return false;
+  }
+}
+
+// Mettre à jour le bouton Résultats selon l'état connexion/vote/scrutin
+async function updateResultsButton() {
+  const resultsBtn = document.getElementById('nav-results-btn');
+  if (!resultsBtn) return;
+  
+  const hasVoted = await checkUserHasVoted();
+  const scrutinOpen = await getScrutinState();
+  
+  if (hasVoted) {
+    // A voté : afficher le bouton
+    resultsBtn.style.display = 'inline-flex';
+    if (scrutinOpen === true) {
+      // Scrutin ouvert -> va vers waiting.html
+      resultsBtn.textContent = 'Résultats (en attente)';
+      resultsBtn.dataset.target = 'waiting';
+    } else {
+      // Scrutin fermé -> va vers resultat.html
+      resultsBtn.textContent = 'Résultats';
+      resultsBtn.dataset.target = 'results';
+    }
+  } else {
+    // N'a pas voté : masquer le bouton (ou rediriger vers vote)
+    resultsBtn.style.display = 'none';
+  }
+}
+
+// Gérer le clic sur le bouton Résultats
+function handleResultsClick() {
+  const resultsBtn = document.getElementById('nav-results-btn');
+  if (!resultsBtn) return;
+  
+  const target = resultsBtn.dataset.target;
+  if (target === 'waiting') {
+    window.location.href = 'waiting.html';
+  } else if (target === 'results') {
+    window.location.href = 'resultat.html';
+  } else {
+    // Par défaut : vérifier l'état
+    checkUserHasVoted().then(hasVoted => {
+      if (hasVoted) {
+        getScrutinState().then(open => {
+          window.location.href = open === true ? 'waiting.html' : 'resultat.html';
+        });
+      } else {
+        // N'a pas voté -> rediriger vers le flow de vote
+        window.location.href = 'connexion.html';
+      }
+    });
+  }
+}
+
+// Mettre à jour updateNavState pour aussi gérer le bouton Résultats
+const originalUpdateNavState = updateNavState;
+updateNavState = function() {
+  originalUpdateNavState();
+  // Le bouton Résultats est géré par updateResultsButton()
+};
+
+// Mettre à jour connectUser pour rafraîchir le bouton Résultats
+const originalConnectUser = connectUser;
+connectUser = function() {
+  originalConnectUser();
+  updateResultsButton();
+};
+
 // ============================================
 
 const loginForm = document.getElementById('login-form');
@@ -345,7 +406,8 @@ async function initVotePage() {
         return;
       }
       
-      // Succès -> rediriger vers page d'attente
+      // Succès -> mettre à jour le bouton Résultats puis rediriger vers page d'attente
+      await updateResultsButton();
       window.location.href = 'waiting.html';
       
     } catch (err) {

@@ -16,27 +16,14 @@
         Vote Citoyen
       </a>
       <nav class="nav-main" aria-label="Navigation principale">
-        <div class="preview-state-wrapper" aria-label="Menu Preview State">
-          <span class="preview-state-label">Preview State</span>
-          <button id="preview-state-btn" class="preview-state-btn" aria-label="Ouvrir le menu Preview State" aria-expanded="false" aria-haspopup="true">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </button>
-          <div id="preview-state-menu" class="preview-state-menu" role="menu" aria-label="Menu Preview State">
-            <span class="menu-label">Preview State</span>
-            <a href="index.html" class="menu-btn" role="menuitem">1 - Accueil</a>
-            <a href="connexion.html" class="menu-btn" role="menuitem">2 - Connexion</a>
-            <a href="verification.html" class="menu-btn" role="menuitem">3 - Vérification</a>
-            <a href="vote.html" class="menu-btn" role="menuitem">4 - Bulletin</a>
-            <a href="resultat.html" class="menu-btn" role="menuitem">5 - Résultats</a>
-          </div>
-        </div>
         <a href="connexion.html" id="nav-login-btn" class="nav-login-btn" aria-label="Se connecter">Se connecter</a>
+        <a href="resultat.html" id="nav-results-btn" class="nav-results-btn" aria-label="Résultats" style="display:none;">Résultats</a>
         <div id="profile-wrapper" class="profile-wrapper" style="display:none;" aria-label="Menu profil">
           <button id="profile-btn" class="profile-btn" aria-label="Ouvrir le menu du profil" aria-expanded="false" aria-haspopup="true">
             <img src="assets/profile-icon.svg" alt="" aria-hidden="true" style="width:20px;height:20px;display:block;" />
           </button>
           <div id="profile-menu" class="profile-menu" role="menu" aria-label="Menu du profil">
-            <span class="menu-label">Preview Account</span>
+            <span class="menu-label">Mon compte</span>
             <button id="profile-logout" class="menu-btn" role="menuitem">Se déconnecter</button>
           </div>
         </div>
