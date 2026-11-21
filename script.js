@@ -4,11 +4,11 @@
  */
 
 // Configuration Supabase - À REMPLIR AVEC VOS CLÉS
-const SUPABASE_URL = 'https://gdnvbjmxukdgmkvwngob.supabase.co';
+const SUPABASE_URL = 'https://gdnvbjmxukdgmkvwngob.supabaseClient.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_YP0k0VVFyKdvn9zlL8frYA_liKWDJJ1';
 
 // Client Supabase global
-let supabase = null;
+let supabaseClient = null;
 
 // Noms des candidats pour l'affichage
 const CANDIDAT_NOMS = {
@@ -28,19 +28,19 @@ async function initSupabase() {
     return;
   }
   
-  supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  supabase = window.supabaseClient.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   
   // Authentification anonyme automatique
-  const { data: { session } } = await supabase.auth.getSession();
+  const { data: { session } } = await supabaseClient.auth.getSession();
   if (!session) {
-    const { error } = await supabase.auth.signInAnonymously();
+    const { error } = await supabaseClient.auth.signInAnonymously();
     if (error) {
       console.error('Erreur auth anonyme:', error.message);
     }
   }
   
   // Écouter les changements d'auth (refresh token, etc.)
-  supabase.auth.onAuthStateChange((event, session) => {
+  supabaseClient.auth.onAuthStateChange((event, session) => {
     if (event === 'SIGNED_IN' && session) {
       console.log('Utilisateur anonyme connecté:', session.user.id);
     }
@@ -50,7 +50,7 @@ async function initSupabase() {
 // Helpers communs
 async function getScrutinState() {
   if (!supabase) await initSupabase();
-  const { data, error } = await supabase.from('scrutin').select('ouvert').single();
+  const { data, error } = await supabaseClient.from('scrutin').select('ouvert').single();
   if (error) {
     console.error('Erreur lecture scrutin:', error.message);
     return null;
@@ -329,7 +329,7 @@ async function initVotePage() {
     submitBtn.textContent = 'Enregistrement…';
     
     try {
-      const { error } = await supabase.rpc('enregistrer_vote', { p_candidat: candidat });
+      const { error } = await supabaseClient.rpc('enregistrer_vote', { p_candidat: candidat });
       
       if (error) {
         if (error.message.includes('Déjà voté')) {
@@ -423,7 +423,7 @@ async function initResultatPage() {
 }
 
 async function loadRealResults() {
-  const { data: votes, error } = await supabase.from('votes').select('candidat');
+  const { data: votes, error } = await supabaseClient.from('votes').select('candidat');
   
   if (error) {
     console.error('Erreur chargement votes:', error.message);
