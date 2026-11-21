@@ -255,60 +255,63 @@ async function updateResultsButton() {
   const resultsBtn = document.getElementById('nav-results-btn');
   if (!resultsBtn) return;
   
+  // Le bouton est toujours visible
+  resultsBtn.style.display = 'inline-flex';
+  
   const hasVoted = await checkUserHasVoted();
   const scrutinOpen = await getScrutinState();
   
-  if (hasVoted) {
-    // A voté : afficher le bouton
-    resultsBtn.style.display = 'inline-flex';
-    if (scrutinOpen === true) {
-      // Scrutin ouvert -> va vers waiting.html
-      resultsBtn.textContent = 'Résultats (en attente)';
-      resultsBtn.dataset.target = 'waiting';
-    } else {
-      // Scrutin fermé -> va vers resultat.html
-      resultsBtn.textContent = 'Résultats';
-      resultsBtn.dataset.target = 'results';
-    }
+  if (scrutinOpen === false) {
+    // Scrutin fermé -> résultats
+    resultsBtn.textContent = 'Voir les résultats';
+    resultsBtn.dataset.target = 'results';
+  } else if (hasVoted) {
+    // Scrutin ouvert et déjà voté -> attente
+    resultsBtn.textContent = 'Voir les résultats (en attente)';
+    resultsBtn.dataset.target = 'waiting';
   } else {
-    // N'a pas voté : masquer le bouton (ou rediriger vers vote)
-    resultsBtn.style.display = 'none';
+    // Scrutin ouvert et pas encore voté -> parcours de vote
+    resultsBtn.textContent = 'Voir les résultats';
+    resultsBtn.dataset.target = 'vote';
   }
 }
 
 // Gérer le clic sur le bouton Résultats
-function handleResultsClick() {
+async function handleResultsClick() {
   const resultsBtn = document.getElementById('nav-results-btn');
   if (!resultsBtn) return;
   
-  const target = resultsBtn.dataset.target;
-  if (target === 'waiting') {
+  const isConnected = sessionStorage.getItem(STORAGE_KEY) === 'true';
+  const scrutinOpen = await getScrutinState();
+  const hasVoted = await checkUserHasVoted();
+  
+  // Cas 3 : Scrutin fermé -> résultats (nécessite d'être connecté)
+  if (scrutinOpen === false) {
+    if (isConnected) {
+      window.location.href = 'resultat.html';
+    } else {
+      // Stocker la destination pour rediriger après connexion
+      sessionStorage.setItem('redirectAfterLogin', 'resultat.html');
+      window.location.href = 'connexion.html';
+    }
+    return;
+  }
+  
+  // Cas 2 : Scrutin ouvert et déjà voté -> page d'attente
+  if (hasVoted) {
     window.location.href = 'waiting.html';
-  } else if (target === 'results') {
-    window.location.href = 'resultat.html';
+    return;
+  }
+  
+  // Cas 1 : Scrutin ouvert et pas encore voté -> parcours de vote
+  if (isConnected) {
+    window.location.href = 'verification.html';
   } else {
-    // Par défaut : vérifier l'état
-    checkUserHasVoted().then(hasVoted => {
-      if (hasVoted) {
-        getScrutinState().then(open => {
-          window.location.href = open === true ? 'waiting.html' : 'resultat.html';
-        });
-      } else {
-        // N'a pas voté -> rediriger vers le flow de vote
-        window.location.href = 'connexion.html';
-      }
-    });
+    window.location.href = 'connexion.html';
   }
 }
 
-// Mettre à jour updateNavState pour aussi gérer le bouton Résultats
-const originalUpdateNavState = updateNavState;
-updateNavState = function() {
-  originalUpdateNavState();
-  // Le bouton Résultats est géré par updateResultsButton()
-};
-
-// Mettre à jour connectUser pour rafraîchir le bouton Résultats
+// Mettre à jour connectUser pour rafraîchir le bouton Résultats et gérer la redirection après connexion
 const originalConnectUser = connectUser;
 connectUser = function() {
   originalConnectUser();
@@ -322,7 +325,14 @@ if (loginForm) {
   loginForm.addEventListener('submit', function (e) {
     e.preventDefault();
     connectUser();
-    window.location.href = 'verification.html';
+    // Rediriger vers la destination stockée si présente (ex: résultats après connexion)
+    const redirectTo = sessionStorage.getItem('redirectAfterLogin');
+    if (redirectTo) {
+      sessionStorage.removeItem('redirectAfterLogin');
+      window.location.href = redirectTo;
+    } else {
+      window.location.href = 'verification.html';
+    }
   });
 }
 
@@ -332,7 +342,13 @@ if (skipBtn && skipBtn.closest('.form-actions')) {
   skipBtn.addEventListener('click', function (e) {
     e.preventDefault();
     connectUser();
-    window.location.href = 'verification.html';
+    const redirectTo = sessionStorage.getItem('redirectAfterLogin');
+    if (redirectTo) {
+      sessionStorage.removeItem('redirectAfterLogin');
+      window.location.href = redirectTo;
+    } else {
+      window.location.href = 'verification.html';
+    }
   });
 }
 
