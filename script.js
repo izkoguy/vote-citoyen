@@ -364,6 +364,7 @@ window.simulateIdentite = function () {
   state.classList.add('success');
   btn.textContent = 'Simulation terminée';
   btn.disabled = true;
+  btn.classList.add('btn-simulation-terminee');
   document.getElementById('panel-identite').classList.add('hidden');
   document.getElementById('panel-visage').classList.remove('hidden');
   document.querySelectorAll('.progress-step').forEach((step, i) => {
@@ -380,6 +381,7 @@ window.simulateVisage = function () {
   state.classList.add('success');
   btn.textContent = 'Simulation terminée';
   btn.disabled = true;
+  btn.classList.add('btn-simulation-terminee');
   const continuer = document.getElementById('btn-continuer');
   if (continuer) continuer.style.display = 'inline-flex';
   document.querySelectorAll('.progress-step').forEach((step, i) => {

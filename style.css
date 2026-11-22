@@ -485,6 +485,19 @@ main {
   background: #e8ecf0;
 }
 
+/* État "Simulation terminée" — aspect indicateur, non cliquable */
+.btn-simulation-terminee {
+  cursor: default;
+  pointer-events: none;
+  box-shadow: none !important;
+  border: none !important;
+  background: transparent !important;
+  color: var(--bleu-profond) !important;
+  transition: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+}
+
 /* Formulaire connexion */
 .form-card {
   max-width: 520px;
