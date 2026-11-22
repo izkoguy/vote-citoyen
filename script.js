@@ -664,18 +664,18 @@ function updateResultsDisplay(counts, total) {
   const gagnantEl = document.getElementById('resultat-gagnant');
   if (gagnantEl) {
     if (gagnants.length === 0 || total === 0) {
-      gagnantEl.innerHTML = '<p class="resultat-gagnant-texte">Aucun vote enregistré.</p>';
+      gagnantEl.innerHTML = '<span class="resultat-gagnant-texte">Aucun vote enregistré.</span>';
     } else if (gagnants.length === 1) {
       const nomGagnant = CANDIDAT_NOMS[gagnants[0]] || gagnants[0];
       gagnantEl.innerHTML = `
-        <p class="resultat-gagnant-label">Réforme adoptée :</p>
-        <p class="resultat-gagnant-nom">${nomGagnant}</p>
+        <span class="resultat-gagnant-label">Réforme adoptée :</span>
+        <span class="resultat-gagnant-nom">${nomGagnant}</span>
       `;
     } else {
       const noms = gagnants.map(k => CANDIDAT_NOMS[k] || k).join(' et ');
       gagnantEl.innerHTML = `
-        <p class="resultat-gagnant-label">Égalité entre plusieurs réformes :</p>
-        <p class="resultat-gagnant-nom">${noms}</p>
+        <span class="resultat-gagnant-label">Égalité entre plusieurs réformes :</span>
+        <span class="resultat-gagnant-nom">${noms}</span>
       `;
     }
   }
