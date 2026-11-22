@@ -33,61 +33,44 @@
 
   <main>
     <section aria-label="Bulletin de vote">
-      <h1>Bulletin — Scrutin Vote Citoyen</h1>
-      <p class="subtitle">Sélectionnez le candidat de votre choix. Votre vote sera enregistré dans le système de vote.</p>
-      <p class="demo-note">Votre vote est réel et ne peut pas être modifié.</p>
+      <h1>Bulletin — Scrutin citoyen</h1>
+      <p class="subtitle">Sélectionnez la réforme de votre choix. Votre vote sera enregistré.</p>
+      <p class="demo-note">• Normalement, un scrutin permettrai de voter pour un candidat aux présidentielles. Pour ce ce prototype, le vote porte ici sur les propositions des réformes presentées.</p>
+      <p class="demo-note">• Votre vote est réel et ne peut pas être modifié. Vous ne pouvez voter qu'une seule fois.</p>
 
-      <form id="vote-form" class="vote-grid" aria-label="Candidats à la présidence">
-        <label class="vote-card" for="candidat-delarbre">
-          <input type="radio" id="candidat-delarbre" name="candidat" value="delarbre" />
+      <form id="vote-form" class="vote-grid" aria-label="Réformes proposées">
+        <label class="vote-card" for="reform-numerique">
+          <input type="radio" id="reform-numerique" name="candidat" value="numerique" />
           <div class="card-body">
-            <h3 class="card-title">Monsieur Delarbre</h3>
-            <p class="card-desc">Candidat au scrutin Vote Citoyen.</p>
+            <h3 class="card-title">Vote numérique</h3>
+            <p class="card-desc">Réforme proposée n°1. <a href="#" class="detail-link" data-modal="modal-numerique" aria-label="Voir les détails du vote numérique">Détails</a></p>
             <span class="select-btn">Sélectionner</span>
           </div>
         </label>
 
-        <label class="vote-card" for="candidat-jeremy">
-          <input type="radio" id="candidat-jeremy" name="candidat" value="jeremy" />
+        <label class="vote-card" for="reform-preference">
+          <input type="radio" id="reform-preference" name="candidat" value="preference" />
           <div class="card-body">
-            <h3 class="card-title">Jérémy</h3>
-            <p class="card-desc">Candidat au scrutin Vote Citoyen.</p>
+            <h3 class="card-title">Vote par préférence</h3>
+            <p class="card-desc">Réforme proposée n°2. <a href="#" class="detail-link" data-modal="modal-preference" aria-label="Voir les détails du vote par préférence">Détails</a></p>
             <span class="select-btn">Sélectionner</span>
           </div>
         </label>
 
-        <label class="vote-card" for="candidat-nahil">
-          <input type="radio" id="candidat-nahil" name="candidat" value="nahil" />
+        <label class="vote-card" for="reform-courrier">
+          <input type="radio" id="reform-courrier" name="candidat" value="courrier" />
           <div class="card-body">
-            <h3 class="card-title">Nahil</h3>
-            <p class="card-desc">Candidat au scrutin Vote Citoyen.</p>
+            <h3 class="card-title">Vote par courrier</h3>
+            <p class="card-desc">Réforme proposée n°3. <a href="#" class="detail-link" data-modal="modal-courrier" aria-label="Voir les détails du vote par courrier">Détails</a></p>
             <span class="select-btn">Sélectionner</span>
           </div>
         </label>
 
-        <label class="vote-card" for="candidat-lea">
-          <input type="radio" id="candidat-lea" name="candidat" value="lea" />
+        <label class="vote-card" for="reform-blanc-significatif">
+          <input type="radio" id="reform-blanc-significatif" name="candidat" value="blanc_significatif" />
           <div class="card-body">
-            <h3 class="card-title">Michou</h3>
-            <p class="card-desc">Candidat au scrutin Vote Citoyen.</p>
-            <span class="select-btn">Sélectionner</span>
-          </div>
-        </label>
-
-        <label class="vote-card" for="candidat-thomas">
-          <input type="radio" id="candidat-thomas" name="candidat" value="thomas" />
-          <div class="card-body">
-            <h3 class="card-title">Michael Jackson</h3>
-            <p class="card-desc">Candidat au scrutin Vote Citoyen.</p>
-            <span class="select-btn">Sélectionner</span>
-          </div>
-        </label>
-
-        <label class="vote-card" for="candidat-camille">
-          <input type="radio" id="candidat-camille" name="candidat" value="camille" />
-          <div class="card-body">
-            <h3 class="card-title">Jul</h3>
-            <p class="card-desc">Candidat au scrutin Vote Citoyen.</p>
+            <h3 class="card-title">Rendre le vote blanc significatif</h3>
+            <p class="card-desc">Réforme proposée n°4. <a href="#" class="detail-link" data-modal="modal-blanc-significatif" aria-label="Voir les détails sur rendre le vote blanc significatif">Détails</a></p>
             <span class="select-btn">Sélectionner</span>
           </div>
         </label>
@@ -96,7 +79,7 @@
           <input type="radio" id="vote-blanc" name="candidat" value="blanc" />
           <div class="card-body">
             <h3 class="card-title">Vote blanc</h3>
-            <p class="card-desc">Je choisis de ne voter pour aucun candidat.</p>
+            <p class="card-desc">Je choisis de ne voter pour aucune réforme.</p>
             <span class="select-btn">Sélectionner</span>
           </div>
         </label>
@@ -105,6 +88,59 @@
           <button type="submit" class="btn btn-primary">Confirmer mon choix</button>
         </div>
       </form>
+
+      <!-- Modales de détails pour les réformes -->
+      <div class="modal-overlay" id="modal-numerique" role="dialog" aria-modal="true" aria-labelledby="modal-numerique-title" hidden>
+        <div class="modal">
+          <header class="modal-header">
+            <h2 id="modal-numerique-title">Vote numérique</h2>
+            <button type="button" class="modal-close" aria-label="Fermer la fenêtre">×</button>
+          </header>
+          <div class="modal-body">
+            <p class="modal-subtitle">Détail de la réforme</p>
+            <p>Détail de la réforme à compléter.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-overlay" id="modal-preference" role="dialog" aria-modal="true" aria-labelledby="modal-preference-title" hidden>
+        <div class="modal">
+          <header class="modal-header">
+            <h2 id="modal-preference-title">Vote par préférence</h2>
+            <button type="button" class="modal-close" aria-label="Fermer la fenêtre">×</button>
+          </header>
+          <div class="modal-body">
+            <p class="modal-subtitle">Détail de la réforme</p>
+            <p>Détail de la réforme à compléter.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-overlay" id="modal-courrier" role="dialog" aria-modal="true" aria-labelledby="modal-courrier-title" hidden>
+        <div class="modal">
+          <header class="modal-header">
+            <h2 id="modal-courrier-title">Vote par courrier</h2>
+            <button type="button" class="modal-close" aria-label="Fermer la fenêtre">×</button>
+          </header>
+          <div class="modal-body">
+            <p class="modal-subtitle">Détail de la réforme</p>
+            <p>Détail de la réforme à compléter.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-overlay" id="modal-blanc-significatif" role="dialog" aria-modal="true" aria-labelledby="modal-blanc-significatif-title" hidden>
+        <div class="modal">
+          <header class="modal-header">
+            <h2 id="modal-blanc-significatif-title">Rendre le vote blanc significatif</h2>
+            <button type="button" class="modal-close" aria-label="Fermer la fenêtre">×</button>
+          </header>
+          <div class="modal-body">
+            <p class="modal-subtitle">Détail de la réforme</p>
+            <p>Détail de la réforme à compléter.</p>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 

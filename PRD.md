@@ -31,26 +31,24 @@ Le système comporte sept écrans principaux pour un **prototype scolaire** :
 1. **Accueil :** présentation de Vote Citoyen, contexte du prototype scolaire et bouton pour commencer.
 2. **Connexion :** formulaire avec authentification anonyme Supabase.
 3. **Vérification :** étapes illustratives de **vérification d'identité** (contrôle de l'identité et de l'éligibilité).
-4. **Vote :** présentation du bulletin du scrutin Vote Citoyen avec six candidats, vote réel enregistré via RPC Supabase.
+4. **Vote :** présentation du bulletin du scrutin citoyen avec quatre propositions de réformes et le vote blanc, vote réel enregistré via RPC Supabase.
 5. **Attente :** écran d'attente de la fermeture du scrutin avec polling automatique.
 6. **Résultats :** **résultats différés réels** — statistiques calculées depuis les votes enregistrés dans Supabase, affichées uniquement après fermeture du scrutin.
 7. **Administration :** interface protégée par code secret pour ouvrir/fermer/réinitialiser le scrutin et compter les votes.
 
 Prévoir également une section informative sur les avantages et les limites du vote en ligne.
 
-### B. Scrutin Vote Citoyen
-
-Le bulletin présente un **scrutin Vote Citoyen** avec six candidats, présentés chacun comme une personne candidate (et non comme un parti politique) :
-
-- Monsieur Delarbre
-- Jérémy
-- Nahil
-- Michou
-- Michael Jackson
-- Jul
-- Vote blanc
-
-Le bulletin permet de sélectionner un candidat et d'enregistrer le vote dans Supabase via la fonction RPC `enregistrer_vote` (atomique, protégée par RLS). Une confirmation de vote doit être visible.
+### B. Scrutin citoyen
+ 
+ Le bulletin présente un **scrutin citoyen** avec quatre propositions de réformes et le vote blanc :
+ 
+ - Vote numérique
+ - Vote par préférence
+ - Vote par courrier
+ - Rendre le vote blanc significatif
+ - Vote blanc
+ 
+ Le bulletin permet de sélectionner une réforme et d'enregistrer le vote dans Supabase via la fonction RPC `enregistrer_vote` (atomique, protégée par RLS). Une confirmation de vote doit être visible.
 
 ### C. Vérification d'identité
 
@@ -67,7 +65,7 @@ Après le vote, présenter un écran de confirmation, puis un écran d'attente v
 
 Les résultats sont calculés en temps réel à partir des votes enregistrés dans la table `votes` de Supabase (RLS : lecture autorisée seulement si scrutin fermé) et totalisent exactement 100 %.
 
-Après la fermeture du scrutin, afficher une page de résultats claire avec les six candidats + vote blanc, leurs pourcentages et un diagramme lisible représentant exactement ces pourcentages et totalisant 100 %.
+Après la fermeture du scrutin, afficher une page de résultats claire avec les quatre réformes + vote blanc, leurs pourcentages et un diagramme lisible représentant exactement ces pourcentages et totalisant 100 %.
 
 Les **références visuelles** (`references/Accueil.png`, `references/connexion.png`) guident la structure de l'en-tête, la navigation, la présentation des formulaires et la hiérarchie typographique.
 

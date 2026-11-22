@@ -4,7 +4,7 @@
 - **Accueil** (`index.html`) : présentation du projet Vote Citoyen, contexte du **prototype scolaire**, bouton pour commencer. Fidélité visuelle à `references/Accueil.png` (structure header, navigation horizontale, hiérarchie typographique) sans intégration des captures dans la page finale.
 - **Connexion** (`connexion.html`) : formulaire de connexion (email + mot de passe) inspiré de `references/connexion.png` (proportions, champs, bouton principal, liens secondaires) ; authentification anonyme Supabase. Aucune capture intégrée.
 - **Vérification** (`verification.html`) : deux étapes distinctes — lecture de la carte d'identité et vérification du visage — avec indicateur de progression, état en attente, bouton de simulation et libellé "prototype scolaire".
-- **Bulletin** (`vote.html`) : bulletin du **scrutin Vote Citoyen** avec six candidats (Monsieur Delarbre, Jérémy, Nahil, Michou, Michael Jackson, Jul). Vote réel enregistré dans Supabase. Confirmation du bulletin visible.
+- **Bulletin** (`vote.html`) : bulletin du **scrutin citoyen** avec quatre propositions de réformes (Vote numérique, Vote par préférence, Vote par courrier, Rendre le vote blanc significatif) et le vote blanc. Vote réel enregistré dans Supabase. Confirmation du bulletin visible.
 - **Attente** (`waiting.html`) : écran d'attente de la fermeture du scrutin, polling de l'état du scrutin.
 - **Résultats** (`resultat.html`) : affichage des résultats réels calculés depuis la base de données Supabase avec diagramme dynamique.
 - **Administration** (`admin.html`) : gestion du scrutin (ouvrir/fermer/réinitialiser/compter les votes) via Edge Function.
@@ -15,7 +15,7 @@ Parcours : Accueil → Connexion → Vérification → Vote → Attente → Rés
 - `index.html` : structure sémantique (header, main, footer), liens vers CSS/JS, navigation, mention visible « Prototype scolaire ».
 - `connexion.html` : formulaire de connexion, fidèle à `references/connexion.png` sans intégration de la capture.
 - `verification.html` : deux panneaux/écrans de vérification (identité + visage), indicateurs de progression, boutons de simulation.
-- `vote.html` : bulletin avec six candidats, vote réel via Supabase RPC `enregistrer_vote`.
+- `vote.html` : bulletin avec quatre réformes et vote blanc, vote réel via Supabase RPC `enregistrer_vote`.
 - `waiting.html` : écran d'attente avec polling de l'état du scrutin.
 - `resultat.html` : affichage des résultats réels depuis la table `votes` de Supabase.
 - `admin.html` : interface d'administration via Edge Function `admin-actions`.
@@ -39,7 +39,7 @@ Aucune copie directe des logos ou contenus protégés. Les références servent 
 ## 5. Interactions réelles avec Supabase
 - **Connexion** : authentification anonyme Supabase (`signInAnonymously`) ; si OK, redirection vers `verification.html`.
 - **Vérification** : deux contrôles distincts (identité et visage), chacun avec indicateur de progression, état en attente, bouton de simulation déclenchant l'état réussi. Libellés expliquant le caractère prototype scolaire.
-- **Vote** : sélection d'un candidat parmi six ; validation (un choix sélectionné) ; enregistrement via RPC `enregistrer_vote` (atomique, RLS) ; redirection vers `waiting.html`.
+- **Vote** : sélection d'une réforme parmi quatre ; validation (un choix sélectionné) ; enregistrement via RPC `enregistrer_vote` (atomique, RLS) ; redirection vers `waiting.html`.
 - **Attente** : polling de l'état du scrutin (`scrutin.ouvert`) toutes les 5 secondes ; redirection auto vers `resultat.html` quand fermé.
 - **Résultats** : lecture des votes depuis la table `votes` (RLS : lecture seulement si scrutin fermé) ; calcul dynamique des pourcentages ; affichage diagramme.
 - **Administration** : actions via Edge Function `admin-actions` (open/close/reset/count) avec code admin stocké dans les secrets Supabase.
@@ -74,11 +74,11 @@ Aucune copie directe des logos ou contenus protégés. Les références servent 
 ---
 
 ## Points à valider avant implémentation
-1. Confirmer que `PRD.md` et `DESIGN.md` sont intégrés (contenu actuel validé).
-2. Valider que le parcours inclut bien Vérification entre Connexion et Vote.
-3. Confirmer que les six candidats sont exacts et que le diagramme totalise 100 %.
-4. Vérifier que le mode Code ne doit pas intégrer `references/Accueil.png` ou `references/connexion.png` dans le rendu final.
-5. Vérifier que le mode Code doit créer `verification.html`, `waiting.html`, `admin.html` et mettre à jour `vote.html` et `resultat.html` selon le parcours avec Supabase.
+ 1. Confirmer que `PRD.md` et `DESIGN.md` sont intégrés (contenu actuel validé).
+ 2. Valider que le parcours inclut bien Vérification entre Connexion et Vote.
+ 3. Confirmer que les quatre réformes et le vote blanc sont exacts et que le diagramme totalise 100 %.
+ 4. Vérifier que le mode Code ne doit pas intégrer `references/Accueil.png` ou `references/connexion.png` dans le rendu final.
+ 5. Vérifier que le mode Code doit créer `verification.html`, `waiting.html`, `admin.html` et mettre à jour `vote.html` et `resultat.html` selon le parcours avec Supabase.
 
 ## Ordre des changements
 1. `supabase/schema.sql` — schéma de base de données (tables, RLS, fonctions).
@@ -86,7 +86,7 @@ Aucune copie directe des logos ou contenus protégés. Les références servent 
 3. `index.html` — mise à jour du parcours et mention du prototype.
 4. `connexion.html` — fidélité visuelle à `connexion.png` sans intégration de la capture.
 5. `verification.html` — création des deux étapes de vérification.
-6. `vote.html` — bulletin du scrutin (6 candidats) + vote réel via RPC.
+6. `vote.html` — bulletin du scrutin (4 réformes + vote blanc) + vote réel via RPC.
 7. `waiting.html` — écran d'attente avec polling.
 8. `resultat.html` — résultats réels depuis la DB + diagramme dynamique.
 9. `admin.html` — interface d'administration.

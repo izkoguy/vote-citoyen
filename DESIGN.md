@@ -79,8 +79,8 @@ Une étape dédiée, visuellement crédible, montrant deux contrôles distincts 
 Chaque contrôle doit avoir son propre écran ou panneau, un indicateur de progression, un état en attente, puis un état réussi déclenché par un bouton de simulation. Aucune caméra n'est activée, aucun document d'identité réel n'est demandé, aucun document n'est téléversé, aucune donnée biométrique n'est collectée et aucune information personnelle n'est stockée. La simulation doit être facile à passer via des boutons de démonstration.
 
 ### Bulletin
-
-Une question clairement mise en évidence (scrutin Vote Citoyen), des options faciles à distinguer et un bouton de continuation. Le bulletin présente six candidats, chacun présenté comme une personne candidate au scrutin (et non comme un parti politique) : Monsieur Delarbre, Jérémy, Nahil, Michou, Michael Jackson et Jul. Le choix est enregistré dans Supabase. Une confirmation de vote doit être visible. Les résultats affichés sont **différés et réels**, calculés à partir des votes enregistrés.
+ 
+ Une question clairement mise en évidence (scrutin citoyen), des options faciles à distinguer et un bouton de continuation. Le bulletin présente quatre propositions de réformes et le vote blanc : Vote numérique, Vote par préférence, Vote par courrier, Rendre le vote blanc significatif. Le choix est enregistré dans Supabase. Une confirmation de vote doit être visible. Les résultats affichés sont **différés et réels**, calculés à partir des votes enregistrés.
 
 ### Résultats
 
@@ -88,7 +88,7 @@ Après le bulletin, présenter un écran de confirmation, puis un écran d'atten
 
 Les résultats sont calculés en temps réel à partir des votes enregistrés dans Supabase et totalisent exactement 100 %.
 
-Après la fermeture du scrutin, afficher une page de résultats claire avec les six candidats, leurs pourcentages et un diagramme lisible représentant exactement ces pourcentages et totalisant 100 %.
+Après la fermeture du scrutin, afficher une page de résultats claire avec les quatre réformes + vote blanc, leurs pourcentages et un diagramme lisible représentant exactement ces pourcentages et totalisant 100 %.
 
 ## 5. Références visuelles
 

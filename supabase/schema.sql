@@ -14,7 +14,7 @@ CREATE TABLE scrutin (
 CREATE TABLE votes (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
-  candidat text NOT NULL CHECK (candidat IN ('delarbre','jeremy','nahil','lea','thomas','camille','blanc')),
+  candidat text NOT NULL CHECK (candidat IN ('numerique','preference','courrier','blanc_significatif','blanc')),
   created_at timestamptz NOT NULL DEFAULT now(),
   UNIQUE (user_id)  -- Un seul vote par utilisateur
 );

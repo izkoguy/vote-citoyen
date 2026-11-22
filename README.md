@@ -21,10 +21,10 @@ Prototype scolaire d'un système de vote citoyen avec backend Supabase : Accueil
 Configurer Supabase selon `SUPABASE_SETUP.md`, puis déployer les fichiers HTML/CSS/JS sur un hébergement statique.
 
 ## Parcours
-
-1. Accueil (`index.html`)
-2. Connexion (`connexion.html`) — authentification anonyme Supabase
-3. Vérification (`verification.html`) — vérification d'identité et d'éligibilité
-4. Vote (`vote.html`) — sélection d'un candidat, vote enregistré dans Supabase
-5. Attente (`waiting.html`) — polling de l'état du scrutin
-6. Résultat (`resultat.html`) — affichage des résultats réels depuis la base de données
+ 
+ 1. Accueil (`index.html`)
+ 2. Connexion (`connexion.html`) — authentification anonyme Supabase
+ 3. Vérification (`verification.html`) — vérification d'identité et d'éligibilité
+ 4. Vote (`vote.html`) — sélection d'une réforme, vote enregistré dans Supabase
+ 5. Attente (`waiting.html`) — polling de l'état du scrutin
+ 6. Résultat (`resultat.html`) — affichage des résultats réels depuis la base de données

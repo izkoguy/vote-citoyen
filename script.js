@@ -10,14 +10,12 @@ const SUPABASE_ANON_KEY = 'sb_publishable_YP0k0VVFyKdvn9zlL8frYA_liKWDJJ1';
 // Client Supabase global
 let supabaseClient = null;
 
-// Noms des candidats pour l'affichage
+// Noms des réformes pour l'affichage
 const CANDIDAT_NOMS = {
-  delarbre: 'Monsieur Delarbre',
-  jeremy: 'Jérémy',
-  nahil: 'Nahil',
-  lea: 'Michou',
-  thomas: 'Michael Jackson',
-  camille: 'Jul',
+  numerique: 'Vote numérique',
+  preference: 'Vote par préférence',
+  courrier: 'Vote par courrier',
+  blanc_significatif: 'Rendre le vote blanc significatif',
   blanc: 'Vote blanc'
 };
 
@@ -411,6 +409,9 @@ async function initVotePage() {
     return;
   }
   
+  // Gestion des modales de détails
+  initModals();
+  
   voteForm.addEventListener('submit', async function (e) {
     e.preventDefault();
     
@@ -455,6 +456,64 @@ async function initVotePage() {
       submitBtn.textContent = originalText;
     }
   });
+}
+
+// Initialisation des modales de détails pour les réformes
+function initModals() {
+  const detailLinks = document.querySelectorAll('.detail-link');
+  const modalOverlays = document.querySelectorAll('.modal-overlay');
+  
+  // Ouvrir la modale correspondante
+  detailLinks.forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      const modalId = this.getAttribute('data-modal');
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.hidden = false;
+        // Focus sur le bouton de fermeture pour l'accessibilité
+        const closeBtn = modal.querySelector('.modal-close');
+        if (closeBtn) closeBtn.focus();
+        // Empêcher le scroll du body
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  });
+  
+  // Fermer les modales
+  modalOverlays.forEach(overlay => {
+    const closeBtn = overlay.querySelector('.modal-close');
+    
+    // Fermer via le bouton ×
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function () {
+        closeModal(overlay);
+      });
+    }
+    
+    // Fermer en cliquant sur l'overlay (arrière-plan)
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) {
+        closeModal(overlay);
+      }
+    });
+  });
+  
+  // Fermer avec la touche Escape
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      modalOverlays.forEach(overlay => {
+        if (!overlay.hidden) {
+          closeModal(overlay);
+        }
+      });
+    }
+  });
+}
+
+function closeModal(modal) {
+  modal.hidden = true;
+  document.body.style.overflow = '';
 }
 
 // ============================================
@@ -550,14 +609,12 @@ function updateResultsDisplay(counts, total) {
   if (!chartContainer) return;
   
   // Ordre d'affichage fixe
-  const order = ['delarbre', 'jeremy', 'nahil', 'lea', 'thomas', 'camille', 'blanc'];
+  const order = ['numerique', 'preference', 'courrier', 'blanc_significatif', 'blanc'];
   const colors = [
     'var(--bleu-profond)',
     'var(--bleu-moyen)',
     '#2a5a8a',
     '#3a6a9a',
-    '#4a7aaa',
-    '#5a8aba',
     '#6a9aba'
   ];
   
@@ -586,6 +643,41 @@ function updateResultsDisplay(counts, total) {
   const noteEl = document.querySelector('.results-summary + div .demo-note');
   if (noteEl) {
     noteEl.textContent = `Résultats calculés à partir de ${total} vote${total > 1 ? 's' : ''} réel${total > 1 ? 's' : ''}.`;
+  }
+  
+  // Déterminer la/les réforme(s) gagnante(s)
+  const gagnants = [];
+  let maxVotes = 0;
+  
+  order.forEach(key => {
+    const count = counts[key] || 0;
+    if (count > maxVotes) {
+      maxVotes = count;
+      gagnants.length = 0;
+      gagnants.push(key);
+    } else if (count === maxVotes && count > 0) {
+      gagnants.push(key);
+    }
+  });
+  
+  // Afficher la mention « Réforme adoptée »
+  const gagnantEl = document.getElementById('resultat-gagnant');
+  if (gagnantEl) {
+    if (gagnants.length === 0 || total === 0) {
+      gagnantEl.innerHTML = '<p class="resultat-gagnant-texte">Aucun vote enregistré.</p>';
+    } else if (gagnants.length === 1) {
+      const nomGagnant = CANDIDAT_NOMS[gagnants[0]] || gagnants[0];
+      gagnantEl.innerHTML = `
+        <p class="resultat-gagnant-label">Réforme adoptée :</p>
+        <p class="resultat-gagnant-nom">${nomGagnant}</p>
+      `;
+    } else {
+      const noms = gagnants.map(k => CANDIDAT_NOMS[k] || k).join(' et ');
+      gagnantEl.innerHTML = `
+        <p class="resultat-gagnant-label">Égalité entre plusieurs réformes :</p>
+        <p class="resultat-gagnant-nom">${noms}</p>
+      `;
+    }
   }
 }
 
